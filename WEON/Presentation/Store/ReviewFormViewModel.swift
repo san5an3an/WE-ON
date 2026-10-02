@@ -8,6 +8,7 @@
 import Foundation
 import Observation
 
+// 리뷰 입력 화면 상태 관리
 @Observable
 @MainActor
 final class ReviewFormViewModel {
@@ -18,6 +19,7 @@ final class ReviewFormViewModel {
 
     let storeId: Int
     let storeName: String
+    // 수정 중인 기존 리뷰 보관, 새로 작성할 때는 nil 지정
     let editing: Review?
     private let dependencies: AppDependencies
 
@@ -31,14 +33,17 @@ final class ReviewFormViewModel {
 
     var isEditing: Bool { editing != nil }
 
+    // 앞뒤 공백을 뺀 본문 글자 수 계산
     var bodyLength: Int {
         draft.body.trimmingCharacters(in: .whitespacesAndNewlines).count
     }
 
+    // 등록 버튼 활성화 여부 계산
     var canSubmit: Bool {
         InputValidationUseCase.validateReview(draft) == nil && !isSaving
     }
 
+    // 새 리뷰 작성 또는 기존 리뷰 수정
     func submit() async {
         isSaving = true
         defer { isSaving = false }

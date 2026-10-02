@@ -7,6 +7,7 @@
 
 import Observation
 
+// 내 주변 가게 목록 상태 관리
 @Observable
 @MainActor
 final class NearbyStoresViewModel {
@@ -23,10 +24,12 @@ final class NearbyStoresViewModel {
         self.dependencies = dependencies
     }
 
+    // 선택한 필터에 맞는 가게 선별
     var filteredStores: [StoreSummary] {
         stores.filter { filter.matches($0.kind) }
     }
 
+    // 현재 위치 주변 가게와 주소 조회
     func load() async {
         isLoading = true
         defer {

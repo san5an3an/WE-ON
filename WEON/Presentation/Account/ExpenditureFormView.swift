@@ -7,12 +7,15 @@
 
 import SwiftUI
 
+// 지출 추가와 수정 화면 구성
 struct ExpenditureFormView: View {
+    // 저장이 끝났을 때 목록 갱신 요청
     @Environment(\.dismiss) private var dismiss
     @State private var viewModel: ExpenditureFormViewModel
     @FocusState private var focusedField: Field?
     private let onSaved: () -> Void
 
+    // 키보드 포커스를 옮길 입력칸 구분
     private enum Field {
         case price
         case store
@@ -96,6 +99,7 @@ struct ExpenditureFormView: View {
         .presentationDetents([.large])
     }
 
+    // 금액 입력칸에 천 단위 콤마 표시
     private var priceText: Binding<String> {
         Binding(
             get: { viewModel.draft.price.map { $0.formatted(.number.grouping(.automatic)) } ?? "" },

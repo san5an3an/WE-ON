@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 내 주변 가게 전체 목록 화면 구성
 struct NearbyStoresView: View {
     @State private var viewModel: NearbyStoresViewModel
 

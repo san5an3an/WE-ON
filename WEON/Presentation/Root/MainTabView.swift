@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 홈, 검색, 가계부, 내 정보 탭 구성
 struct MainTabView: View {
     @Environment(SessionStore.self) private var session
 

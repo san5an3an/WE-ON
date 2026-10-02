@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 탭 안에서 이동하는 화면 목록 정의
 enum AppRoute: Hashable {
     case nearbyStores(StoreFilter)
     case storeDetail(storeId: Int)
@@ -17,6 +18,7 @@ enum AppRoute: Hashable {
     case accountSetting
 }
 
+// 화면 이동 값에 맞는 화면 연결
 private struct AppRouteDestinations: ViewModifier {
     func body(content: Content) -> some View {
         content.navigationDestination(for: AppRoute.self) { route in
@@ -41,6 +43,7 @@ private struct AppRouteDestinations: ViewModifier {
 }
 
 extension View {
+    // 탭마다 화면 이동 연결 적용
     func appRouteDestinations() -> some View {
         modifier(AppRouteDestinations())
     }

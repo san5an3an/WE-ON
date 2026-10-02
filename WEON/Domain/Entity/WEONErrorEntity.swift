@@ -7,6 +7,7 @@
 
 import Foundation
 
+// 앱에서 사용자에게 보여줄 에러 종류 구분
 enum WEONError: LocalizedError, Equatable, Sendable {
     case emptyEmail
     case invalidEmailFormat
@@ -28,6 +29,7 @@ enum WEONError: LocalizedError, Equatable, Sendable {
     case decoding
     case unknown
 
+    // 에러별 안내 문구 지정
     var errorDescription: String? {
         switch self {
         case .emptyEmail: "이메일을 입력해 주세요."

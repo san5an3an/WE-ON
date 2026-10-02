@@ -8,9 +8,11 @@
 import PhotosUI
 import SwiftUI
 
+// 리뷰 작성과 수정 화면 구성
 struct ReviewFormView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var viewModel: ReviewFormViewModel
+    // 사진 보관함에서 고른 사진 보관
     @State private var photoItem: PhotosPickerItem?
     @FocusState private var isEditorFocused: Bool
 
@@ -61,6 +63,7 @@ struct ReviewFormView: View {
         .sensoryFeedback(.success, trigger: viewModel.didSave)
     }
 
+    // 별점 선택 영역 표시
     private var ratingSection: some View {
         VStack(spacing: Spacing.m) {
             Text(viewModel.storeName)
@@ -88,6 +91,7 @@ struct ReviewFormView: View {
         .card(padding: Spacing.xl)
     }
 
+    // 리뷰 본문 입력 영역과 글자 수 표시
     private var bodySection: some View {
         VStack(alignment: .leading, spacing: Spacing.s) {
             Text("리뷰 내용")
@@ -124,6 +128,7 @@ struct ReviewFormView: View {
         }
     }
 
+    // 사진 첨부와 삭제 영역 표시
     private var photoSection: some View {
         VStack(alignment: .leading, spacing: Spacing.s) {
             Text("사진 (선택)")

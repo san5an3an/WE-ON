@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 내 정보 탭 화면 구성
 struct MyPageView: View {
     @Environment(SessionStore.self) private var session
     @State private var viewModel = MyPageViewModel()
@@ -41,6 +42,7 @@ struct MyPageView: View {
         }
     }
 
+    // 프로필과 이번 달 통계를 상단 영역에 배치
     private var header: some View {
         VStack(alignment: .leading, spacing: Spacing.xl) {
             if let user = session.user {
@@ -92,13 +94,14 @@ struct MyPageView: View {
         .padding(.horizontal, Spacing.xl)
         .padding(.top, Spacing.xxl)
         .padding(.bottom, Spacing.xl)
-        // 상태 표시줄 아래까지 배경이 이어지도록 위쪽으로 확장
+        // 상태 표시줄 아래까지 배경이 이어지도록 위쪽 확장
         .background(alignment: .bottom) {
             LinearGradient(colors: [.brandLight, .brand], startPoint: .topLeading, endPoint: .bottomTrailing)
                 .padding(.top, -600)
         }
     }
 
+    // 통계 한 칸 표시
     private func stat(_ title: String, value: String) -> some View {
         VStack(spacing: 4) {
             Text(title)
@@ -114,6 +117,7 @@ struct MyPageView: View {
         .accessibilityElement(children: .combine)
     }
 
+    // 가계부 바로가기, 로그아웃, 탈퇴 메뉴 표시
     private var menu: some View {
         VStack(spacing: 0) {
             if session.isSignedIn {
@@ -137,6 +141,7 @@ struct MyPageView: View {
         .padding(.horizontal, Spacing.xl)
     }
 
+    // 로그아웃 처리
     private func signOut() {
         do {
             try session.signOut()
@@ -145,6 +150,7 @@ struct MyPageView: View {
         }
     }
 
+    // 회원 탈퇴 처리
     private func deleteAccount() async {
         isWorking = true
         defer { isWorking = false }
@@ -157,6 +163,7 @@ struct MyPageView: View {
     }
 }
 
+// 누르면 동작하는 메뉴 한 줄 표시
 private struct MenuRow: View {
     let title: String
     var isDestructive = false
@@ -170,6 +177,7 @@ private struct MenuRow: View {
     }
 }
 
+// 메뉴 한 줄 모양 지정
 private struct MenuRowLabel: View {
     let title: String
     var isDestructive = false

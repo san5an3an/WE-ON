@@ -7,6 +7,7 @@
 
 import Observation
 
+// 가게 상세 화면 상태 관리
 @Observable
 @MainActor
 final class StoreDetailViewModel {
@@ -23,6 +24,7 @@ final class StoreDetailViewModel {
         self.dependencies = dependencies
     }
 
+    // 가게 정보와 최근 리뷰를 동시에 조회
     func load() async {
         isLoading = store == nil
         defer { isLoading = false }

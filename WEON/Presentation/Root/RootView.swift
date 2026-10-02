@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 로그인 상태를 복원하는 동안 스플래시를 보여준 뒤 탭 화면으로 전환
 struct RootView: View {
     @Environment(SessionStore.self) private var session
 
@@ -33,6 +34,7 @@ struct RootView: View {
     }
 }
 
+// 앱 시작 화면 표시
 struct SplashView: View {
     var body: some View {
         ZStack(alignment: .topLeading) {

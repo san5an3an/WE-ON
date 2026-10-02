@@ -8,6 +8,7 @@
 import ImageIO
 import SwiftUI
 
+// 섹션 제목과 오른쪽 버튼 영역 표시
 struct SectionHeader<Trailing: View>: View {
     let title: String
     var subtitle: String?
@@ -30,12 +31,14 @@ struct SectionHeader<Trailing: View>: View {
     }
 }
 
+// 오른쪽 버튼 없는 섹션 제목 생성
 extension SectionHeader where Trailing == EmptyView {
     init(title: String, subtitle: String? = nil) {
         self.init(title: title, subtitle: subtitle) { EmptyView() }
     }
 }
 
+// 로그인이 필요한 화면에 안내 표시
 struct LoginRequiredView: View {
     @Environment(SessionStore.self) private var session
     let message: String
@@ -64,6 +67,7 @@ struct LoginRequiredView: View {
     }
 }
 
+// 작업 중일 때 화면 위에 로딩 표시
 struct LoadingOverlay: ViewModifier {
     let isLoading: Bool
 
@@ -85,6 +89,7 @@ struct LoadingOverlay: ViewModifier {
     }
 }
 
+// 에러가 생기면 확인 알림 표시
 struct ErrorAlert: ViewModifier {
     @Binding var error: WEONError?
 
@@ -102,22 +107,27 @@ struct ErrorAlert: ViewModifier {
 }
 
 extension View {
+    // 로딩 표시 적용
     func loadingOverlay(_ isLoading: Bool) -> some View {
         modifier(LoadingOverlay(isLoading: isLoading))
     }
 
+    // 에러 알림 적용
     func errorAlert(_ error: Binding<WEONError?>) -> some View {
         modifier(ErrorAlert(error: error))
     }
 }
 
+// 라벨이 상자 안에 들어간 입력칸, 포커스 때 흰 배경과 테두리 표시
 struct FormField<Field: View>: View {
     let title: String
     var message: String?
     var isFocused = false
+    // 지우기 버튼에 연결할 입력값 보관
     var text: Binding<String>?
     @ViewBuilder var field: Field
 
+    // 에러, 포커스 상태에 맞는 테두리 색 지정
     private var borderColor: Color {
         if message != nil { return .red.opacity(0.7) }
         return isFocused ? .brandText : .clear
@@ -163,6 +173,7 @@ struct FormField<Field: View>: View {
     }
 }
 
+// 이미지 데이터를 화면에 표시
 struct DataImage: View {
     let data: Data
 

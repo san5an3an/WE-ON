@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 가게 위치를 큰 지도로 표시
 struct StoreMapView: View {
     let store: StoreDetail
 

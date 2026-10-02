@@ -9,6 +9,7 @@ import Foundation
 import Testing
 @testable import WEON
 
+// 서버 응답과 요청 JSON 형식 확인
 struct DTOTests {
     @Test func 가게_상세_응답_변환() throws {
         let json = """

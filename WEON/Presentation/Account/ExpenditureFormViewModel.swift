@@ -7,14 +7,17 @@
 
 import Observation
 
+// 지출 입력 화면 상태 관리
 @Observable
 @MainActor
 final class ExpenditureFormViewModel {
+    // 입력 중인 지출 내용 보관
     var draft: ExpenditureDraft
     private(set) var isSaving = false
     private(set) var didSave = false
     var error: WEONError?
 
+    // 수정 중인 기존 지출 보관, 새로 추가할 때는 nil 지정
     let editing: Expenditure?
     private let dependencies: AppDependencies
 
@@ -26,6 +29,7 @@ final class ExpenditureFormViewModel {
 
     var isEditing: Bool { editing != nil }
 
+    // 저장 버튼 활성화 여부 계산
     var canSubmit: Bool {
         InputValidationUseCase.validateExpenditure(draft) == nil && !isSaving
     }
@@ -36,6 +40,7 @@ final class ExpenditureFormViewModel {
         draft.price = digits.isEmpty ? nil : Int(digits.prefix(9))
     }
 
+    // 새 지출 추가 또는 기존 지출 수정
     func submit() async {
         isSaving = true
         defer { isSaving = false }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 아동급식카드, 선한 영향력 배지 표시
 struct StoreKindBadges: View {
     let kind: StoreKind
     var compact = false
@@ -22,6 +23,7 @@ struct StoreKindBadges: View {
         }
     }
 
+    // 배지 하나 생성
     private func badge(_ title: String, symbol: String, color: Color) -> some View {
         Label(compact ? "" : title, systemImage: symbol)
             .labelStyle(BadgeLabelStyle(showsTitle: !compact))
@@ -34,6 +36,7 @@ struct StoreKindBadges: View {
     }
 }
 
+// compact 모드에서 아이콘만 남기는 Label 스타일 지정
 private struct BadgeLabelStyle: LabelStyle {
     let showsTitle: Bool
 
@@ -45,6 +48,7 @@ private struct BadgeLabelStyle: LabelStyle {
     }
 }
 
+// 평균 별점 표시
 struct RatingView: View {
     let rating: Double
     var size: CGFloat = 13
@@ -62,6 +66,7 @@ struct RatingView: View {
     }
 }
 
+// 가게 목록 한 줄 표시
 struct StoreRow: View {
     let store: StoreSummary
 
@@ -91,6 +96,7 @@ struct StoreRow: View {
     }
 }
 
+// 홈 화면 가로 목록의 가게 카드 표시
 struct StoreCard: View {
     let store: StoreSummary
 
@@ -127,10 +133,12 @@ struct StoreCard: View {
     }
 }
 
+// 가맹 종류별 색으로 가게 썸네일 표시
 struct StoreThumbnail: View {
     let kind: StoreKind
     let size: CGFloat?
 
+    // 가맹 종류에 맞는 색 지정
     private var tint: Color {
         if kind.contains(.goodInfluence) && !kind.contains(.mealCard) { return .benefitStore }
         if kind.contains(.mealCard) && !kind.contains(.goodInfluence) { return .mealCardStore }
@@ -151,6 +159,7 @@ struct StoreThumbnail: View {
     }
 }
 
+// 전체, 아동급식카드, 선한 영향력 필터 버튼 표시
 struct FilterChipBar: View {
     @Binding var selection: StoreFilter
 

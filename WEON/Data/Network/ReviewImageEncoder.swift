@@ -9,7 +9,9 @@ import Foundation
 import ImageIO
 import UniformTypeIdentifiers
 
+// 리뷰 사진을 서버 전송용으로 줄이고 Base64 로 변환
 enum ReviewImageEncoder {
+    // 사진 긴 변의 최대 픽셀 수 지정
     static let maxPixelSize = 1280
 
     // 원본 사진을 긴 변 기준으로 줄인 PNG 데이터로 변환

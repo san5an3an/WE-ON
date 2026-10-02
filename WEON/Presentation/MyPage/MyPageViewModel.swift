@@ -7,6 +7,7 @@
 
 import Observation
 
+// 내 정보 화면 상태 관리
 @Observable
 @MainActor
 final class MyPageViewModel {

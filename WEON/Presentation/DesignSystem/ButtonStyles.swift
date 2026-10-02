@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 그라데이션으로 칠한 기본 버튼 모양 지정
 struct PrimaryButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled
 
@@ -22,6 +23,7 @@ struct PrimaryButtonStyle: ButtonStyle {
     }
 }
 
+// 연한 초록 배경의 보조 버튼 모양 지정
 struct SecondaryButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -34,6 +36,7 @@ struct SecondaryButtonStyle: ButtonStyle {
     }
 }
 
+// 노랑에서 주황으로 이어지는 강조 버튼 모양 지정
 struct WarmButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -45,6 +48,7 @@ struct WarmButtonStyle: ButtonStyle {
     }
 }
 
+// 테두리만 있는 버튼 모양 지정
 struct OutlineButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label

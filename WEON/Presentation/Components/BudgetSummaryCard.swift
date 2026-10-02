@@ -8,10 +8,12 @@
 import Charts
 import SwiftUI
 
+// 사용액과 잔액을 도넛 차트로 표시
 struct BudgetSummaryCard: View {
     let summary: AccountSummary
     var title = "이번 달 가계부"
 
+    // 차트 조각 하나의 이름, 금액, 색 보관
     private struct Slice: Identifiable {
         let name: String
         let amount: Int
@@ -19,6 +21,7 @@ struct BudgetSummaryCard: View {
         var id: String { name }
     }
 
+    // 예산이 없으면 회색 원 하나만 표시
     private var slices: [Slice] {
         guard summary.budget > 0 else {
             return [Slice(name: "예산 없음", amount: 1, color: .hairline)]
@@ -71,6 +74,7 @@ struct BudgetSummaryCard: View {
         .accessibilityElement(children: .combine)
     }
 
+    // 금액 한 줄 표시
     private func amountRow(_ label: String, amount: Int, color: Color) -> some View {
         HStack(alignment: .firstTextBaseline, spacing: Spacing.s) {
             Text(label)

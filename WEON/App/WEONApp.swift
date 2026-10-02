@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 앱 시작 지점 지정과 로그인 상태 공유
 @main
 struct WEONApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate

@@ -7,11 +7,13 @@
 
 import SwiftUI
 
+// 이메일 회원가입 화면 구성
 struct SignUpView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var viewModel = SignUpViewModel()
     @FocusState private var focusedField: Field?
 
+    // 키보드 포커스를 옮길 입력칸 구분
     private enum Field {
         case email
         case password

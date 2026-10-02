@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 홈 탭 화면 구성
 struct HomeView: View {
     @Environment(SessionStore.self) private var session
     @State private var viewModel = HomeViewModel()
@@ -32,6 +33,7 @@ struct HomeView: View {
         .task(id: session.user) { await viewModel.load(isSignedIn: session.isSignedIn) }
     }
 
+    // 로고, 현재 위치, 인사말, 가장 가까운 가게를 상단 영역에 배치
     private var hero: some View {
         VStack(alignment: .leading, spacing: Spacing.l) {
             Image("WEONLogo")
@@ -85,13 +87,14 @@ struct HomeView: View {
         .padding(.horizontal, Spacing.xl)
         .padding(.top, Spacing.l)
         .padding(.bottom, Spacing.xl + Spacing.xxl)
-        // 상태 표시줄 아래까지 배경이 이어지도록 위쪽으로 확장
+        // 상태 표시줄 아래까지 배경이 이어지도록 위쪽 확장
         .background(alignment: .bottom) {
             LinearGradient(colors: [.brandSoft, .brandLight], startPoint: .top, endPoint: .bottom)
                 .padding(.top, -600)
         }
     }
 
+    // 로그인했을 때만 이번 달 가계부 요약 표시
     @ViewBuilder
     private var budgetSection: some View {
         if session.isSignedIn {
@@ -105,6 +108,7 @@ struct HomeView: View {
         }
     }
 
+    // 가맹 종류별 바로가기 표시
     private var categorySection: some View {
         HStack(spacing: Spacing.m) {
             NavigationLink(value: AppRoute.nearbyStores(.mealCard)) {
@@ -118,6 +122,7 @@ struct HomeView: View {
         .padding(.horizontal, Spacing.l)
     }
 
+    // 내 주변 가게 가로 목록 표시
     private var nearbySection: some View {
         VStack(alignment: .leading, spacing: Spacing.m) {
             SectionHeader(title: "내 주변 식당", subtitle: "아이들과 한 끼를 나누는 우리 동네 식당이에요") {
@@ -150,6 +155,7 @@ struct HomeView: View {
     }
 }
 
+// 가맹 종류 바로가기 카드 표시
 private struct CategoryTile: View {
     let title: String
     let symbol: String

@@ -7,6 +7,7 @@
 
 import Foundation
 
+// Info.plist 에 들어 있는 서버 주소와 외부 API 키 조회
 enum AppConfiguration {
     static var serverURL: URL {
         let value = Bundle.main.object(forInfoDictionaryKey: "SERVER_URL") as? String
@@ -18,11 +19,13 @@ enum AppConfiguration {
     }
 }
 
+// 서버 요청 방식 구분
 enum HTTPMethod: String, Sendable {
     case get = "GET"
     case post = "POST"
 }
 
+// 서버 요청 한 건의 경로, 방식, Query, Body 보관
 struct Endpoint: Sendable {
     let path: String
     let method: HTTPMethod
@@ -30,6 +33,7 @@ struct Endpoint: Sendable {
     var body: (any Encodable & Sendable)?
 }
 
+// 서버 요청 전송과 응답 해석 담당
 struct APIClient: Sendable {
     private let baseURL: URL
     private let session: URLSession
@@ -39,6 +43,7 @@ struct APIClient: Sendable {
         self.session = session
     }
 
+    // 요청 전송 후 응답 JSON 을 지정한 타입으로 변환
     func send<Response: Decodable>(_ endpoint: Endpoint, as type: Response.Type = Response.self) async throws -> Response {
         let data = try await perform(endpoint)
         do {
@@ -48,10 +53,12 @@ struct APIClient: Sendable {
         }
     }
 
+    // 응답 본문이 필요 없는 요청 전송
     func send(_ endpoint: Endpoint) async throws {
         _ = try await perform(endpoint)
     }
 
+    // 상태 코드별로 성공 데이터 반환 또는 에러 변환
     private func perform(_ endpoint: Endpoint) async throws -> Data {
         let request = try makeRequest(endpoint)
         let data: Data
@@ -73,6 +80,7 @@ struct APIClient: Sendable {
         }
     }
 
+    // Endpoint 를 URLRequest 로 변환
     private func makeRequest(_ endpoint: Endpoint) throws -> URLRequest {
         var components = URLComponents(url: baseURL.appending(path: endpoint.path), resolvingAgainstBaseURL: false)
         if !endpoint.queryItems.isEmpty {

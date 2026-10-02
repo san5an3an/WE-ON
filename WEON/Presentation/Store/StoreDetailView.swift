@@ -7,10 +7,12 @@
 
 import SwiftUI
 
+// 가게 상세 화면 구성
 struct StoreDetailView: View {
     @Environment(SessionStore.self) private var session
     @Environment(\.dismiss) private var dismiss
     @State private var viewModel: StoreDetailViewModel
+    // 리뷰 쓰기 화면으로 이동할 값 보관
     @State private var reviewRoute: AppRoute?
 
     init(storeId: Int) {
@@ -40,6 +42,7 @@ struct StoreDetailView: View {
         .task { await viewModel.load() }
     }
 
+    // 가게 정보와 하단 리뷰 쓰기 버튼 배치
     private func content(_ store: StoreDetail) -> some View {
         ScrollView {
             VStack(alignment: .leading, spacing: Spacing.l) {
@@ -70,6 +73,7 @@ struct StoreDetailView: View {
         }
     }
 
+    // 가게 이름, 배지, 별점, 거리 표시
     private func summary(_ store: StoreDetail) -> some View {
         VStack(alignment: .leading, spacing: Spacing.m) {
             StoreKindBadges(kind: store.kind)
@@ -84,6 +88,7 @@ struct StoreDetailView: View {
         }
     }
 
+    // 선한 영향력 가게의 혜택과 조건 표시
     private func benefitCard(_ store: StoreDetail) -> some View {
         VStack(alignment: .leading, spacing: Spacing.m) {
             Label {
@@ -105,6 +110,7 @@ struct StoreDetailView: View {
         }
     }
 
+    // 주소와 위생등급 표시
     private func infoCard(_ store: StoreDetail) -> some View {
         VStack(alignment: .leading, spacing: Spacing.m) {
             infoLine(title: "주소", value: store.shortAddress, copyable: true)
@@ -114,6 +120,7 @@ struct StoreDetailView: View {
         .card()
     }
 
+    // 제목과 값 한 줄 표시, 주소는 공유 버튼 추가
     private func infoLine(title: String, value: String, copyable: Bool = false) -> some View {
         HStack(alignment: .firstTextBaseline, spacing: Spacing.m) {
             Text(title)
@@ -134,6 +141,7 @@ struct StoreDetailView: View {
         }
     }
 
+    // 작은 지도 미리보기, 누르면 큰 지도로 이동
     private func mapPreview(_ store: StoreDetail) -> some View {
         NavigationLink(value: AppRoute.storeMap(store)) {
             ZStack(alignment: .bottomTrailing) {
@@ -152,6 +160,7 @@ struct StoreDetailView: View {
         .buttonStyle(.plain)
     }
 
+    // 최근 리뷰 3개와 전체 보기 링크 표시
     private func reviewSection(_ store: StoreDetail) -> some View {
         VStack(alignment: .leading, spacing: Spacing.s) {
             SectionHeader(title: "리뷰") {

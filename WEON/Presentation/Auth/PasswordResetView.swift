@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 비밀번호 재설정 메일 요청 화면 구성
 struct PasswordResetView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var viewModel = PasswordResetViewModel()

@@ -7,6 +7,7 @@
 
 import Foundation
 
+// Firebase 인증과 서버 회원 API 호출 담당
 struct RemoteAuthRepository: AuthRepository {
     private let firebase: FirebaseAuthClient
     private let client: APIClient
@@ -16,6 +17,7 @@ struct RemoteAuthRepository: AuthRepository {
         self.client = client
     }
 
+    // 입력값 확인 후 Firebase 로그인과 서버 로그인 진행
     func signIn(email: String, password: String) async throws -> UserProfile {
         if let error = InputValidationUseCase.validateLogin(email: email, password: password) { throw error }
         try await firebase.signIn(email: email, password: password)
@@ -28,6 +30,7 @@ struct RemoteAuthRepository: AuthRepository {
         return try? await fetchProfile()
     }
 
+    // Firebase 계정 생성, 서버 가입, 인증 메일 발송 순서로 회원가입 진행
     func signUp(email: String, password: String) async throws {
         if let error = InputValidationUseCase.validateEmail(email) ?? InputValidationUseCase.validatePassword(password) { throw error }
         try await firebase.createUser(email: email, password: password)
@@ -43,15 +46,18 @@ struct RemoteAuthRepository: AuthRepository {
         }
     }
 
+    // 입력값 확인 후 비밀번호 재설정 메일 발송
     func sendPasswordReset(to email: String) async throws {
         if let error = InputValidationUseCase.validateEmail(email) { throw error }
         try await firebase.sendPasswordReset(to: email)
     }
 
+    // 로그아웃 처리
     func signOut() throws {
         try firebase.signOut()
     }
 
+    // 서버 회원 정보와 Firebase 계정 순서로 탈퇴 처리
     func deleteAccount() async throws {
         let token = try await firebase.idToken()
         try await client.send(Endpoint(path: "/myPage/delete", method: .post, body: TokenRequestDTO(firebaseToken: token)))
@@ -59,6 +65,7 @@ struct RemoteAuthRepository: AuthRepository {
         try? firebase.signOut()
     }
 
+    // 서버에서 로그인한 사용자 정보 조회
     private func fetchProfile() async throws -> UserProfile {
         let token = try await firebase.idToken()
         let response: LoginResponseDTO = try await client.send(Endpoint(path: "/login", method: .post, body: TokenRequestDTO(firebaseToken: token)))

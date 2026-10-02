@@ -7,11 +7,13 @@
 
 import XCTest
 
+// 탭 이동과 로그인 화면 진입을 실제 앱으로 확인
 final class TabNavigationUITests: XCTestCase {
     override func setUp() {
         continueAfterFailure = false
     }
 
+    // 탭 4개와 로그인, 회원가입 화면을 차례로 열고 화면마다 스크린샷 저장
     @MainActor
     func test_탭_이동과_로그인_화면() {
         let app = XCUIApplication()
@@ -43,6 +45,7 @@ final class TabNavigationUITests: XCTestCase {
         attach(app, name: "회원가입")
     }
 
+    // 현재 화면 스크린샷을 테스트 결과에 첨부
     @MainActor
     private func attach(_ app: XCUIApplication, name: String) {
         let attachment = XCTAttachment(screenshot: app.screenshot())

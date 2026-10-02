@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 지출 한 건의 상세 정보와 수정, 삭제 화면 구성
 struct ExpenditureDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var expenditure: Expenditure
@@ -64,6 +65,7 @@ struct ExpenditureDetailView: View {
         .errorAlert($error)
     }
 
+    // 지출 삭제 후 이전 화면으로 이동
     private func delete() async {
         isDeleting = true
         defer { isDeleting = false }

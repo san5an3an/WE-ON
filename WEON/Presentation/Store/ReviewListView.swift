@@ -7,10 +7,13 @@
 
 import SwiftUI
 
+// 가게 리뷰 전체 목록 화면 구성
 struct ReviewListView: View {
     @Environment(SessionStore.self) private var session
     @State private var viewModel: ReviewListViewModel
+    // 삭제 확인을 기다리는 리뷰 보관
     @State private var pendingDelete: Review?
+    // 수정 화면으로 이동할 값 보관
     @State private var editRoute: AppRoute?
 
     init(store: StoreDetail) {

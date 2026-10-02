@@ -7,6 +7,7 @@
 
 import Foundation
 
+// 위도와 경도 좌표 보관
 struct Coordinate: Hashable, Sendable {
     let latitude: Double
     let longitude: Double
@@ -15,6 +16,7 @@ struct Coordinate: Hashable, Sendable {
     static let fallback = Coordinate(latitude: 37.66, longitude: 126.80)
 }
 
+// 아동급식카드 가맹점과 선한 영향력 가게 여부 표시
 struct StoreKind: OptionSet, Hashable, Sendable {
     let rawValue: Int
 
@@ -36,11 +38,13 @@ struct StoreKind: OptionSet, Hashable, Sendable {
     }
 }
 
+// 가게 목록 필터 종류 구분
 enum StoreFilter: CaseIterable, Hashable, Sendable {
     case all
     case mealCard
     case goodInfluence
 
+    // 필터 버튼 문구 지정
     var title: String {
         switch self {
         case .all: "전체"
@@ -49,6 +53,7 @@ enum StoreFilter: CaseIterable, Hashable, Sendable {
         }
     }
 
+    // 가게가 이 필터 조건에 맞는지 확인
     func matches(_ kind: StoreKind) -> Bool {
         switch self {
         case .all: true
@@ -58,6 +63,7 @@ enum StoreFilter: CaseIterable, Hashable, Sendable {
     }
 }
 
+// 가게 목록에 쓰는 요약 정보 보관
 struct StoreSummary: Identifiable, Hashable, Sendable {
     let id: Int
     let name: String
@@ -66,6 +72,7 @@ struct StoreSummary: Identifiable, Hashable, Sendable {
     let rating: Double
 }
 
+// 가게 상세 화면에 쓰는 정보 보관
 struct StoreDetail: Identifiable, Hashable, Sendable {
     let id: Int
     let name: String

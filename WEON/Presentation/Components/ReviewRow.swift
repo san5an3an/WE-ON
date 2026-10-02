@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 리뷰 한 건 표시, 내 리뷰면 수정과 삭제 메뉴 표시
 struct ReviewRow: View {
     let review: Review
     var isMine = false
@@ -74,6 +75,7 @@ struct ReviewRow: View {
     }
 }
 
+// 별점을 별 다섯 개로 표시
 struct StarRow: View {
     let rating: Int
     var size: CGFloat = 11

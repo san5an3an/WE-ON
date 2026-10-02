@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 가계부 탭, 로그인 전에는 로그인 안내 표시
 struct AccountView: View {
     @Environment(SessionStore.self) private var session
 
@@ -22,9 +23,11 @@ struct AccountView: View {
     }
 }
 
+// 로그인 후 보이는 월별 가계부 화면 구성
 private struct AccountContentView: View {
     @State private var viewModel = AccountViewModel()
     @State private var isAddPresented = false
+    // 삭제 확인을 기다리는 지출 보관
     @State private var pendingDelete: Expenditure?
 
     var body: some View {
@@ -101,6 +104,7 @@ private struct AccountContentView: View {
         .task { await viewModel.load() }
     }
 
+    // 이전 달과 다음 달 이동 버튼 표시
     private var monthSwitcher: some View {
         HStack {
             Button {
@@ -131,6 +135,7 @@ private struct AccountContentView: View {
     }
 }
 
+// 지출 내역 한 줄 표시
 struct ExpenditureRow: View {
     let expenditure: Expenditure
 

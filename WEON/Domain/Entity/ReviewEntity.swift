@@ -7,6 +7,7 @@
 
 import Foundation
 
+// 가게 리뷰 한 건 보관
 struct Review: Identifiable, Hashable, Sendable {
     let id: Int
     let userId: Int
@@ -19,6 +20,7 @@ struct Review: Identifiable, Hashable, Sendable {
     let imageData: Data?
 }
 
+// 리뷰 작성과 수정 화면의 입력값 보관
 struct ReviewDraft: Equatable, Sendable {
     var rating: Int = 5
     var body: String = ""

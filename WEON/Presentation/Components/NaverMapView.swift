@@ -15,6 +15,7 @@ struct NaverMapView: UIViewRepresentable {
     var isInteractive = true
     var showsMyLocation = true
 
+    // 가게 위치 마커와 지도 조작 옵션 지정
     func makeUIView(context: Context) -> NMFNaverMapView {
         let mapView = NMFNaverMapView(frame: .zero)
         mapView.showLocationButton = isInteractive && showsMyLocation
@@ -41,10 +42,12 @@ struct NaverMapView: UIViewRepresentable {
         return mapView
     }
 
+    // 지도 값이 바뀌지 않아 갱신 생략
     func updateUIView(_ uiView: NMFNaverMapView, context: Context) {}
 
     func makeCoordinator() -> Coordinator { Coordinator() }
 
+    // 화면이 다시 그려져도 마커 유지
     final class Coordinator {
         var marker: NMFMarker?
     }

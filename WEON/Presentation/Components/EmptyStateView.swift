@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 내용이 없을 때 로고와 안내 문구, 버튼 표시
 struct EmptyStateView: View {
     let title: String
     var message: String?

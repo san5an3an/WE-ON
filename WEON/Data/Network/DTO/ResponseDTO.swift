@@ -7,20 +7,24 @@
 
 import Foundation
 
+// 서버 에러 응답, 키 이름은 서버 형식 그대로 유지
 struct ErrorResponseDTO: Decodable {
     let ErrorMessage: String
 }
 
+// 로그인 응답 해석
 struct LoginResponseDTO: Decodable {
     let userId: Int
     let email: String
     let userName: String
 
+    // 화면에서 쓰는 사용자 정보로 변환
     func toEntity() -> UserProfile {
         UserProfile(id: userId, email: email, nickname: userName)
     }
 }
 
+// 가게 목록 한 칸 응답 해석
 struct SimpleStoreDTO: Decodable {
     let storeId: Int
     let storeName: String
@@ -28,11 +32,13 @@ struct SimpleStoreDTO: Decodable {
     let curDist: Double
     let totalRating: Double
 
+    // 화면에서 쓰는 가게 요약으로 변환
     func toEntity() -> StoreSummary {
         StoreSummary(id: storeId, name: storeName, kind: StoreKind(storeType: storeType), distanceKm: curDist, rating: totalRating)
     }
 }
 
+// 가게 상세 응답, refine 접두 필드는 공공데이터 원본 이름 유지
 struct StoreDTO: Decodable {
     let storeId: Int
     let storeName: String
@@ -48,6 +54,7 @@ struct StoreDTO: Decodable {
     let totalRating: Double
     let hygieneGrade: String
 
+    // 화면에서 쓰는 가게 상세로 변환
     func toEntity() -> StoreDetail {
         StoreDetail(
             id: storeId,
@@ -66,6 +73,7 @@ struct StoreDTO: Decodable {
     }
 }
 
+// 리뷰 응답 해석
 struct ReviewDTO: Decodable {
     let userId: Int
     let userName: String
@@ -77,6 +85,7 @@ struct ReviewDTO: Decodable {
     let rating: Int
     let reviewImage: String?
 
+    // Base64 사진을 이미지 데이터로 바꾸며 리뷰로 변환
     func toEntity() -> Review {
         Review(
             id: reviewId,
@@ -92,6 +101,7 @@ struct ReviewDTO: Decodable {
     }
 }
 
+// 지출 내역 응답 해석
 struct ExpenditureDTO: Decodable {
     let userId: Int
     let accountId: Int
@@ -100,6 +110,7 @@ struct ExpenditureDTO: Decodable {
     let date: String
     let body: String
 
+    // 날짜 문자열을 Date 로 바꾸며 지출로 변환
     func toEntity() -> Expenditure {
         Expenditure(
             id: accountId,
@@ -112,19 +123,23 @@ struct ExpenditureDTO: Decodable {
     }
 }
 
+// 월별 가계부 요약 응답 해석, charge 는 사용액 표시
 struct AccountSummaryDTO: Decodable {
     let balance: Int
     let charge: Int
 
+    // 사용액과 잔액으로 변환
     func toEntity() -> AccountSummary {
         AccountSummary(used: charge, balance: balance)
     }
 }
 
+// 지출 알림 등록 여부 응답 해석
 struct AlarmStateDTO: Decodable {
     let exist: Bool
 }
 
+// Kakao 좌표 주소 변환 응답 해석
 struct KakaoAddressResponseDTO: Decodable {
     struct Document: Decodable {
         let road_address: AddressName?
@@ -143,6 +158,7 @@ struct KakaoAddressResponseDTO: Decodable {
     }
 }
 
+// 서버와 주고받는 날짜 문자열 형식 지정
 enum APIDateFormat {
     case day
     case dateTime
@@ -154,6 +170,7 @@ enum APIDateFormat {
         }
     }
 
+    // 서울 시간대 기준 DateFormatter 생성
     private var formatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko_KR")
@@ -162,6 +179,8 @@ enum APIDateFormat {
         return formatter
     }
 
+    // Date 를 서버 형식 문자열로 변환
     func string(from date: Date) -> String { formatter.string(from: date) }
+    // 서버 형식 문자열을 Date 로 변환
     func date(from string: String) -> Date? { formatter.date(from: String(string.prefix(pattern.count))) }
 }

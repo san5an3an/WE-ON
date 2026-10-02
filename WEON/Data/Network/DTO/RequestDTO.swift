@@ -7,15 +7,18 @@
 
 import Foundation
 
+// 로그인 토큰만 보내는 요청 Body 생성
 struct TokenRequestDTO: Encodable, Sendable {
     let firebaseToken: String
 }
 
+// 회원가입 요청 Body 생성
 struct SignUpRequestDTO: Encodable, Sendable {
     let firebaseToken: String
     let email: String
 }
 
+// 현재 위치 요청 Body 생성, 서버 키 이름 curLogt 는 경도 표시
 struct LocationRequestDTO: Encodable, Sendable {
     let curLat: Double
     let curLogt: Double
@@ -26,11 +29,13 @@ struct LocationRequestDTO: Encodable, Sendable {
     }
 }
 
+// 연월 단위 가계부 조회 요청 Body 생성
 struct YearMonthRequestDTO: Encodable, Sendable {
     let firebaseToken: String
     let yearMonth: String
 }
 
+// 지출 추가와 수정 요청 Body, 추가할 때는 accountId 생략
 struct ExpenditureRequestDTO: Encodable, Sendable {
     let firebaseToken: String
     let accountId: Int?
@@ -49,21 +54,25 @@ struct ExpenditureRequestDTO: Encodable, Sendable {
     }
 }
 
+// 지출 삭제 요청 Body 생성
 struct ExpenditureDeleteRequestDTO: Encodable, Sendable {
     let firebaseToken: String
     let accountId: Int
 }
 
+// 이번 달 예산 저장 요청 Body 생성
 struct BudgetRequestDTO: Encodable, Sendable {
     let firebaseToken: String
     let amount: Int
 }
 
+// 지출 알림 등록과 해제 요청 Body 생성
 struct AlarmRequestDTO: Encodable, Sendable {
     let firebaseToken: String
     let FCMToken: String
 }
 
+// 리뷰 작성 요청 Body 생성
 struct ReviewCreateRequestDTO: Encodable, Sendable {
     let firebaseToken: String
     let storeId: Int
@@ -88,6 +97,7 @@ struct ReviewCreateRequestDTO: Encodable, Sendable {
     }
 }
 
+// 리뷰 수정 요청 Body 생성
 struct ReviewUpdateRequestDTO: Encodable, Sendable {
     let firebaseToken: String
     let reviewId: Int
@@ -96,6 +106,7 @@ struct ReviewUpdateRequestDTO: Encodable, Sendable {
     let rating: Int
     let reviewImage: String?
 
+    // 사진이 없을 때도 reviewImage 키를 null 로 전송
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(firebaseToken, forKey: .firebaseToken)
@@ -111,6 +122,7 @@ struct ReviewUpdateRequestDTO: Encodable, Sendable {
     }
 }
 
+// 리뷰 삭제 요청 Body 생성
 struct ReviewDeleteRequestDTO: Encodable, Sendable {
     let firebaseToken: String
     let reviewId: Int

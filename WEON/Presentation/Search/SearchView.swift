@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 가게 검색 탭 화면 구성
 struct SearchView: View {
     @State private var viewModel = SearchViewModel()
 
@@ -38,6 +39,7 @@ struct SearchView: View {
         }
     }
 
+    // 검색 전 안내와 검색 결과 없음 안내 표시
     @ViewBuilder
     private var emptyState: some View {
         if let keyword = viewModel.searchedKeyword, viewModel.filteredResults.isEmpty, !viewModel.isLoading {

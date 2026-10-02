@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 이메일 로그인 화면 구성
 struct LoginView: View {
     @Environment(SessionStore.self) private var session
     @Environment(\.dismiss) private var dismiss
@@ -14,6 +15,7 @@ struct LoginView: View {
     @State private var isPasswordVisible = false
     @FocusState private var focusedField: Field?
 
+    // 키보드 포커스를 옮길 입력칸 구분
     private enum Field {
         case email
         case password

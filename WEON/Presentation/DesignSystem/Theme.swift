@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// 앱 색상 토큰 지정
 extension Color {
     static let brand = Color("BrandPrimary")
     static let brandLight = Color("BrandLight")
@@ -21,11 +22,12 @@ extension Color {
 }
 
 extension Font {
-    // LINE Seed 서체를 Dynamic Type 에 맞춰 크기 조정
+    // LINE Seed 서체를 Dynamic Type 에 맞춰 크기 지정
     static func seed(_ size: CGFloat, weight: SeedWeight = .regular, relativeTo style: Font.TextStyle = .body) -> Font {
         .custom(weight.postScriptName, size: size, relativeTo: style)
     }
 
+    // LINE Seed 서체 굵기 구분
     enum SeedWeight {
         case regular
         case bold
@@ -45,6 +47,7 @@ extension LinearGradient {
     static let warm = LinearGradient(colors: [.mealCardStore, .benefitStore], startPoint: .topLeading, endPoint: .bottomTrailing)
 }
 
+// 화면 여백 단계 지정
 enum Spacing {
     static let xs: CGFloat = 4
     static let s: CGFloat = 8
@@ -54,12 +57,14 @@ enum Spacing {
     static let xxl: CGFloat = 32
 }
 
+// 모서리 둥글기 단계 지정
 enum Radius {
     static let s: CGFloat = 10
     static let m: CGFloat = 16
     static let l: CGFloat = 22
 }
 
+// 흰 배경과 얇은 테두리로 카드 모양 지정
 struct CardModifier: ViewModifier {
     var padding: CGFloat = Spacing.l
 
@@ -76,6 +81,7 @@ struct CardModifier: ViewModifier {
 }
 
 extension View {
+    // 카드 모양 적용
     func card(padding: CGFloat = Spacing.l) -> some View {
         modifier(CardModifier(padding: padding))
     }

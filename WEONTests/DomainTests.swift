@@ -9,6 +9,7 @@ import Foundation
 import Testing
 @testable import WEON
 
+// 로그인, 가계부, 리뷰 입력값 확인 규칙 검사
 struct InputValidationTests {
     @Test(arguments: [
         ("", "123456", WEONError.emptyEmail),
@@ -40,6 +41,7 @@ struct InputValidationTests {
     }
 }
 
+// 가맹 종류 변환과 거리 표시 검사
 struct StoreEntityTests {
     @Test(arguments: [(0, true, false), (1, false, true), (2, true, true), (9, false, false)])
     func storeType_변환(storeType: Int, goodInfluence: Bool, mealCard: Bool) {
@@ -62,6 +64,7 @@ struct StoreEntityTests {
     }
 }
 
+// 연월 이동, 예산 비율, 날짜별 묶음 검사
 struct AccountEntityTests {
     @Test func 월_이동() {
         #expect(YearMonth(year: 2026, month: 1).adding(months: -1) == YearMonth(year: 2025, month: 12))

@@ -7,6 +7,7 @@
 
 import Observation
 
+// 비밀번호 재설정 화면 상태 관리
 @Observable
 @MainActor
 final class PasswordResetViewModel {
@@ -21,8 +22,10 @@ final class PasswordResetViewModel {
         self.dependencies = dependencies
     }
 
+    // 메일 보내기 버튼 활성화 여부 계산
     var canSubmit: Bool { InputValidationUseCase.validateEmail(email) == nil && !isLoading }
 
+    // 비밀번호 재설정 메일 발송
     func send() async {
         isLoading = true
         defer { isLoading = false }
