@@ -9,6 +9,7 @@ import Foundation
 import Testing
 @testable import WEON
 
+// 화면 상태 관리 로직 검사
 @MainActor
 struct ViewModelTests {
     @Test func 로그인_성공시_세션에_사용자_저장() async {
@@ -103,5 +104,23 @@ struct ViewModelTests {
         #expect(viewModel.isEditing)
         #expect(viewModel.draft.rating == 3)
         #expect(viewModel.canSubmit)
+    }
+
+    @Test func 알림_권한을_거절하면_서버에_등록하지_않음() async {
+        let alarm = RecordingAlarmRepository()
+        let viewModel = AccountSettingViewModel(dependencies: .mock(alarm: alarm, notification: MockNotificationPermissionRepository(granted: false)))
+        await viewModel.setAlarm(true)
+        #expect(alarm.subscribeCalls == 0)
+        #expect(viewModel.isAlarmOn == false)
+        #expect(viewModel.needsNotificationPermission)
+    }
+
+    @Test func 알림_권한을_허용하면_서버에_등록() async {
+        let alarm = RecordingAlarmRepository()
+        let viewModel = AccountSettingViewModel(dependencies: .mock(alarm: alarm))
+        await viewModel.setAlarm(true)
+        #expect(alarm.subscribeCalls == 1)
+        #expect(viewModel.isAlarmOn)
+        #expect(viewModel.needsNotificationPermission == false)
     }
 }

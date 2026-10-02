@@ -67,6 +67,7 @@
 		9F25C011F994AA0CEDD9DDAF /* ReviewImageEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5275CCBDCBE46AE4489513 /* ReviewImageEncoder.swift */; };
 		A357503154B5818BDAA4E642 /* PushTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC78E6436D9F69E77B852753 /* PushTokenStore.swift */; };
 		A49B7CBBE600EE9953FC4BDE /* RemoteAlarmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3087C3F003DA2C1E6EA7F5B /* RemoteAlarmRepository.swift */; };
+		A94E66CD0B35D8E13422DE5A /* DeviceNotificationPermissionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E1A228F6FB0D9B3A49D22B /* DeviceNotificationPermissionRepository.swift */; };
 		AFD92ED78D4F3B088FECD58F /* NaverMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9115BD28C6161C8E596436 /* NaverMapView.swift */; };
 		B1149F88D0FFA1FED068617C /* ReviewFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B587D6EB127E2848BB3CDF /* ReviewFormView.swift */; };
 		B3A2493D40C08CC3FA3E0A7A /* FirebaseAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670108503EFF74EF413D5AA /* FirebaseAuthClient.swift */; };
@@ -76,6 +77,7 @@
 		C5EE765C8AA4ABCE9C1652BC /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD2561D71AF52D68803AB300 /* AccountView.swift */; };
 		C7EC3A6D3047E7CFCCFC7D10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B00A164361FA8E96B65A4EF /* Assets.xcassets */; };
 		C922660D9BABEB9863150FE8 /* ResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67016C3ED77A1E9F1E13FBB3 /* ResponseDTO.swift */; };
+		CAC452FEBE306C97D269AA36 /* NotificationPermissionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEB62FC74A5C67E796D9005 /* NotificationPermissionRepository.swift */; };
 		CCABD491CFF9574ABF1B7113 /* StoreComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FB28EFAD31A94D772527B4 /* StoreComponents.swift */; };
 		D02BBC16E35AE9BF36B01EDB /* AccountSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140B126E5D28F8A25D3BA97D /* AccountSettingView.swift */; };
 		DA2DE7E1A8D4F8CF4DF9CA3F /* AccountEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11670684AAEE2CE4B079B304 /* AccountEntity.swift */; };
@@ -171,6 +173,7 @@
 		C190081B66632B3528537B24 /* ReviewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListView.swift; sourceTree = "<group>"; };
 		C58F90F1F01AD89EA09945F1 /* StoreEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreEntity.swift; sourceTree = "<group>"; };
 		C64F1D54A36F3BABD00F085B /* TabNavigationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabNavigationUITests.swift; sourceTree = "<group>"; };
+		C9E1A228F6FB0D9B3A49D22B /* DeviceNotificationPermissionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceNotificationPermissionRepository.swift; sourceTree = "<group>"; };
 		CD2561D71AF52D68803AB300 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
 		CE44399ADAEF63CA0DC0FA48 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
 		D3087C3F003DA2C1E6EA7F5B /* RemoteAlarmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAlarmRepository.swift; sourceTree = "<group>"; };
@@ -185,6 +188,7 @@
 		F50016DF619EB179D01B63F9 /* RemoteAuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAuthRepository.swift; sourceTree = "<group>"; };
 		FA4DA2ACB99F7AA32E82E6F8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		FBBF5DA3344809A07FF3D977 /* ExpenditureFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenditureFormViewModel.swift; sourceTree = "<group>"; };
+		FBEB62FC74A5C67E796D9005 /* NotificationPermissionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPermissionRepository.swift; sourceTree = "<group>"; };
 		FC5275CCBDCBE46AE4489513 /* ReviewImageEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewImageEncoder.swift; sourceTree = "<group>"; };
 		FD9208D1BFC1E8FF225E7360 /* RemoteAccountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAccountRepository.swift; sourceTree = "<group>"; };
 		FDEB46BBE684C9343D61FD57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -261,6 +265,14 @@
 				58F1F622C3F92EC0DC750236 /* WEONApp.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		3A4F9440168ECEE3C8A728D5 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				C9E1A228F6FB0D9B3A49D22B /* DeviceNotificationPermissionRepository.swift */,
+			);
+			path = Notification;
 			sourceTree = "<group>";
 		};
 		3D36ECBA18C71D7DEB84F1B8 /* Config */ = {
@@ -374,6 +386,7 @@
 				26D6682DFE001944C91CEB61 /* AlarmRepository.swift */,
 				CE44399ADAEF63CA0DC0FA48 /* AuthRepository.swift */,
 				556E89AE9460996E80B26D9A /* LocationRepository.swift */,
+				FBEB62FC74A5C67E796D9005 /* NotificationPermissionRepository.swift */,
 				5D22C15DC8C6AB44C2EE82E9 /* ReviewRepository.swift */,
 				369E8B273DFD217373265ED7 /* StoreRepository.swift */,
 			);
@@ -484,6 +497,7 @@
 				B159040BEB192D6C190F1DE6 /* Firebase */,
 				F5D4C5C2FE9E94709B63184E /* Location */,
 				FB15F690881ECE397B29CFF3 /* Network */,
+				3A4F9440168ECEE3C8A728D5 /* Notification */,
 				CD5669DF01E911F6D9CA78B8 /* Repository */,
 			);
 			path = Data;
@@ -673,6 +687,7 @@
 				43DFDBFABFC87197284393C5 /* ButtonStyles.swift in Sources */,
 				90B7DB14437399D625A77207 /* CommonComponents.swift in Sources */,
 				768F988B1594A97DC719118A /* DeviceLocationRepository.swift in Sources */,
+				A94E66CD0B35D8E13422DE5A /* DeviceNotificationPermissionRepository.swift in Sources */,
 				8D1F099555F87984794481C1 /* EmptyStateView.swift in Sources */,
 				377F72D42CD6C2E9FFE3791B /* ExpenditureDetailView.swift in Sources */,
 				5547306EE7DF6AF523DA2B58 /* ExpenditureFormView.swift in Sources */,
@@ -691,6 +706,7 @@
 				AFD92ED78D4F3B088FECD58F /* NaverMapView.swift in Sources */,
 				4069FFC5A39ACD4358A0F3B7 /* NearbyStoresView.swift in Sources */,
 				5BFAAAD69EBD5107ADC798BD /* NearbyStoresViewModel.swift in Sources */,
+				CAC452FEBE306C97D269AA36 /* NotificationPermissionRepository.swift in Sources */,
 				5AF8250ED1C436F9A64BDA45 /* PasswordResetView.swift in Sources */,
 				EE2AA10B3E58188DA12DA024 /* PasswordResetViewModel.swift in Sources */,
 				A357503154B5818BDAA4E642 /* PushTokenStore.swift in Sources */,

@@ -7,6 +7,7 @@
 
 import Foundation
 
+// 화면에서 쓰는 Repository 묶음 보관, 테스트에서는 Mock 으로 교체
 struct AppDependencies: Sendable {
     let auth: any AuthRepository
     let store: any StoreRepository
@@ -14,10 +15,12 @@ struct AppDependencies: Sendable {
     let account: any AccountRepository
     let alarm: any AlarmRepository
     let location: any LocationRepository
+    let notification: any NotificationPermissionRepository
 
     // 화면에서 기본으로 쓰는 실제 서버 연결 구성
     @MainActor static let shared: AppDependencies = .live()
 
+    // 실제 서버와 기기 기능을 쓰는 Repository 생성
     @MainActor
     static func live() -> AppDependencies {
         AppDependencies(
@@ -26,7 +29,8 @@ struct AppDependencies: Sendable {
             review: RemoteReviewRepository(),
             account: RemoteAccountRepository(),
             alarm: RemoteAlarmRepository(),
-            location: DeviceLocationRepository()
+            location: DeviceLocationRepository(),
+            notification: DeviceNotificationPermissionRepository()
         )
     }
 

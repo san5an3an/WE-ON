@@ -7,9 +7,11 @@
 
 import SwiftUI
 
+// 이번 달 예산과 지출 알림 설정 화면 구성
 struct AccountSettingView: View {
     @State private var viewModel = AccountSettingViewModel()
     @FocusState private var isBudgetFocused: Bool
+    @Environment(\.openURL) private var openURL
 
     var body: some View {
         @Bindable var viewModel = viewModel
@@ -53,9 +55,19 @@ struct AccountSettingView: View {
         } message: {
             Text(viewModel.message ?? "")
         }
+        // 알림 권한을 거절한 경우 설정 앱으로 이동하는 안내 표시
+        .alert("알림 권한이 꺼져 있어요", isPresented: $viewModel.needsNotificationPermission) {
+            Button("설정 열기") {
+                if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
+            }
+            Button("닫기", role: .cancel) {}
+        } message: {
+            Text("지출 알림을 받으려면 설정 앱에서 WE-ON 알림을 허용해 주세요.")
+        }
         .task { await viewModel.load() }
     }
 
+    // 금액 입력칸에 천 단위 콤마 표시
     private var budgetText: Binding<String> {
         Binding(
             get: { viewModel.budget.map { $0.formatted(.number.grouping(.automatic)) } ?? "" },

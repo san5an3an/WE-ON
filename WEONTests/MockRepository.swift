@@ -8,6 +8,7 @@
 import Foundation
 @testable import WEON
 
+// 테스트에서 쓰는 가짜 로그인 Repository, 테스트는 MainActor 한 곳에서만 실행해 @unchecked Sendable 사용
 final class MockAuthRepository: AuthRepository, @unchecked Sendable {
     var signInResult: Result<UserProfile, WEONError> = .success(UserProfile(id: 1, email: "a@b.com", nickname: "위온"))
     var signUpError: WEONError?
@@ -27,6 +28,7 @@ final class MockAuthRepository: AuthRepository, @unchecked Sendable {
     func deleteAccount() async throws {}
 }
 
+// 고정된 가게 3곳을 돌려주는 가짜 가게 Repository
 struct MockStoreRepository: StoreRepository {
     var stores: [StoreSummary] = [
         StoreSummary(id: 1, name: "행복 분식", kind: StoreKind(storeType: 1), distanceKm: 0.4, rating: 4.5),
@@ -41,6 +43,7 @@ struct MockStoreRepository: StoreRepository {
     func storeDetail(id: Int, around coordinate: Coordinate) async throws -> StoreDetail { throw WEONError.server }
 }
 
+// 작성과 삭제 요청을 기록하는 가짜 리뷰 Repository
 final class MockReviewRepository: ReviewRepository, @unchecked Sendable {
     var reviewList: [Review] = []
     private(set) var created: [ReviewDraft] = []
@@ -53,6 +56,7 @@ final class MockReviewRepository: ReviewRepository, @unchecked Sendable {
     func deleteReview(id: Int) async throws { deletedIds.append(id) }
 }
 
+// 요청한 연월과 예산을 기록하는 가짜 가계부 Repository
 final class MockAccountRepository: AccountRepository, @unchecked Sendable {
     var summaryValue = AccountSummary(used: 30_000, balance: 70_000)
     var list: [Expenditure] = []
@@ -70,25 +74,44 @@ final class MockAccountRepository: AccountRepository, @unchecked Sendable {
     func setBudget(_ amount: Int) async throws { budgets.append(amount) }
 }
 
+// 항상 알림 미등록 상태를 돌려주는 가짜 알림 Repository
 struct MockAlarmRepository: AlarmRepository {
     func isSubscribed() async throws -> Bool { false }
     func subscribe() async throws {}
     func unsubscribe() async throws {}
 }
 
+// 위치 권한이 없는 상태를 흉내 내는 가짜 위치 Repository
 struct MockLocationRepository: LocationRepository {
     func isAuthorized() async -> Bool { false }
     func currentCoordinate() async -> Coordinate? { nil }
     func address(of coordinate: Coordinate) async throws -> String? { nil }
 }
 
+// 알림 권한 응답을 지정할 수 있는 가짜 알림 권한 Repository
+struct MockNotificationPermissionRepository: NotificationPermissionRepository {
+    var granted = true
+    func requestAuthorization() async -> Bool { granted }
+}
+
+// 알림 등록 요청 횟수를 기록하는 가짜 알림 Repository
+final class RecordingAlarmRepository: AlarmRepository, @unchecked Sendable {
+    private(set) var subscribeCalls = 0
+    func isSubscribed() async throws -> Bool { subscribeCalls > 0 }
+    func subscribe() async throws { subscribeCalls += 1 }
+    func unsubscribe() async throws {}
+}
+
 extension AppDependencies {
+    // 가짜 Repository 로 채운 의존성 생성
     static func mock(
         auth: any AuthRepository = MockAuthRepository(),
         store: any StoreRepository = MockStoreRepository(),
         review: any ReviewRepository = MockReviewRepository(),
-        account: any AccountRepository = MockAccountRepository()
+        account: any AccountRepository = MockAccountRepository(),
+        alarm: any AlarmRepository = MockAlarmRepository(),
+        notification: any NotificationPermissionRepository = MockNotificationPermissionRepository()
     ) -> AppDependencies {
-        AppDependencies(auth: auth, store: store, review: review, account: account, alarm: MockAlarmRepository(), location: MockLocationRepository())
+        AppDependencies(auth: auth, store: store, review: review, account: account, alarm: alarm, location: MockLocationRepository(), notification: notification)
     }
 }
