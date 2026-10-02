@@ -71,7 +71,7 @@ struct MyPageView: View {
                     stat("지출 건수", value: "\(viewModel.expenditureCount)건")
                 }
                 .padding(.vertical, Spacing.m)
-                .background(Color.cardSurface.opacity(0.6), in: RoundedRectangle(cornerRadius: Radius.m, style: .continuous))
+                .background(Color.white.opacity(0.55), in: RoundedRectangle(cornerRadius: Radius.m, style: .continuous))
             } else {
                 VStack(alignment: .leading, spacing: Spacing.m) {
                     Text("로그인하고\n더 많은 기능을 이용해 보세요")

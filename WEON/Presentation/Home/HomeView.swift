@@ -49,7 +49,7 @@ struct HomeView: View {
             .font(.seed(13, weight: .bold, relativeTo: .footnote))
             .padding(.horizontal, Spacing.m)
             .padding(.vertical, 6)
-            .background(Color.cardSurface.opacity(0.7), in: Capsule())
+            .background(Color.white.opacity(0.6), in: Capsule())
 
             Text(session.user.map { "\($0.nickname)님,\n오늘은 어디서 먹을까요?" } ?? "오늘은\n어디서 먹을까요?")
                 .font(.seed(28, weight: .bold, relativeTo: .title))
