@@ -45,7 +45,8 @@ beforeEach(async () => {
       `INSERT INTO stores (id, name, store_type, road_address, lot_address, lat, lng, benefit_name, benefit_target, source) VALUES
        (1, '행복 분식', 1, '경기도 고양시 일산동구 중앙로 1 (장항동)', '장항동 1', 37.661, 126.801, NULL, NULL, 'test'),
        (2, '선한 국밥', 0, '경기도 고양시 일산동구 중앙로 2', '장항동 2', 37.665, 126.805, '국밥 무료', '결식아동', 'test'),
-       (3, '함께 식당', 2, '서울특별시 중구 세종대로 110', '태평로1가 31', 37.5665, 126.978, '식사 무료', '아동급식카드 소지 아동', 'test')`,
+       (3, '함께 식당', 2, '서울특별시 중구 세종대로 110', '태평로1가 31', 37.5665, 126.978, '식사 무료', '아동급식카드 소지 아동', 'test'),
+       (4, '부산 세종식당', 1, '부산광역시 부산진구 중앙대로 1', '부전동 1', 35.1796, 129.0756, NULL, NULL, 'test')`,
     ),
   ]);
 });
@@ -107,8 +108,14 @@ describe("가게", () => {
     const result = await call("POST", "/restaurant/findByCur", here);
     expect(result.status).toBe(200);
     expect(result.json.map((store: { storeId: number }) => store.storeId)).toEqual([1, 2]);
-    expect(result.json[0]).toEqual({ storeId: 1, storeName: "행복 분식", storeType: 1, curDist: expect.any(Number), totalRating: 0 });
+    expect(result.json[0]).toEqual({ storeId: 1, storeName: "행복 분식", storeType: 1, storeCategory: "restaurant", curDist: expect.any(Number), totalRating: 0 });
     expect(result.json[0].curDist).toBeLessThan(0.2);
+  });
+
+  it("현재 위치에서 20km 밖에 있는 가게는 검색하지 않는다", async () => {
+    expect((await call("POST", "/restaurant/findByKeyword?keyword=" + encodeURIComponent("세종"), here)).json.map((s: { storeId: number }) => s.storeId)).toEqual([3]);
+    const busan = { curLat: 35.18, curLogt: 129.07 };
+    expect((await call("POST", "/restaurant/findByKeyword?keyword=" + encodeURIComponent("세종"), busan)).json.map((s: { storeId: number }) => s.storeId)).toEqual([4]);
   });
 
   it("키워드로 이름과 주소를 검색한다", async () => {
@@ -130,6 +137,7 @@ describe("가게", () => {
       prodName: "국밥 무료",
       prodTarget: "결식아동",
       storeType: 0,
+      storeCategory: "restaurant",
       totalRating: 0,
       hygieneGrade: "",
     });
