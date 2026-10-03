@@ -84,8 +84,10 @@
 		DB2450EFECF0A1E63ED6DEE6 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754A253284C5B67F50C2AEE0 /* Theme.swift */; };
 		DF96BB57BE60E6FDD5497B0F /* InputValidationUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400C3DEAF72BAE57673C89FF /* InputValidationUseCase.swift */; };
 		E60680A0CA19436D011144D4 /* StoreEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C58F90F1F01AD89EA09945F1 /* StoreEntity.swift */; };
+		E918708854E4796F3C3AF657 /* NicknameEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B0419B2FF8777262857CF0 /* NicknameEditViewModel.swift */; };
 		EE2AA10B3E58188DA12DA024 /* PasswordResetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175724DA9942C2508FB0418E /* PasswordResetViewModel.swift */; };
 		F186313BF0CE1A7172D4B2DE /* ReviewFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835C5FEFDCAF91A16FCC8369 /* ReviewFormViewModel.swift */; };
+		F201F0FB999ABD37F93BBB6A /* NicknameEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BF0865E5E8F8D308BDAD031 /* NicknameEditView.swift */; };
 		F83C3E2C1A3CCD74C710936B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDEB46BBE684C9343D61FD57 /* AppDelegate.swift */; };
 		FDE2D7D5F2DC4416F49531FE /* ReviewRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97414A5FCB3AF54C80CF477F /* ReviewRow.swift */; };
 /* End PBXBuildFile section */
@@ -143,6 +145,7 @@
 		5D22C15DC8C6AB44C2EE82E9 /* ReviewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRepository.swift; sourceTree = "<group>"; };
 		5FCBEECDCBE470C251F4B34E /* AccountSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingViewModel.swift; sourceTree = "<group>"; };
 		6133FB3EE27E151700870C57 /* StoreMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreMapView.swift; sourceTree = "<group>"; };
+		65B0419B2FF8777262857CF0 /* NicknameEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameEditViewModel.swift; sourceTree = "<group>"; };
 		662D2ACB7D53C51057E39F61 /* ExpenditureGroupingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenditureGroupingUseCase.swift; sourceTree = "<group>"; };
 		67016C3ED77A1E9F1E13FBB3 /* ResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDTO.swift; sourceTree = "<group>"; };
 		68FEEDC1DFA1B2FD47EE69E2 /* ButtonStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyles.swift; sourceTree = "<group>"; };
@@ -155,6 +158,7 @@
 		813F28E75D2A8F28BDF0ADD2 /* WEONTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = WEONTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8247534985C5D6EEBBA81A02 /* StoreDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreDetailViewModel.swift; sourceTree = "<group>"; };
 		835C5FEFDCAF91A16FCC8369 /* ReviewFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFormViewModel.swift; sourceTree = "<group>"; };
+		8BF0865E5E8F8D308BDAD031 /* NicknameEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameEditView.swift; sourceTree = "<group>"; };
 		8C2F6F04127C0728BAD13AF6 /* NearbyStoresViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyStoresViewModel.swift; sourceTree = "<group>"; };
 		90454F9853AA11A2495BFAD8 /* PasswordResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetView.swift; sourceTree = "<group>"; };
 		97414A5FCB3AF54C80CF477F /* ReviewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRow.swift; sourceTree = "<group>"; };
@@ -430,6 +434,8 @@
 			children = (
 				0336BFC84BA1E892DD79E906 /* MyPageView.swift */,
 				038715CA59910CD0B7CC7611 /* MyPageViewModel.swift */,
+				8BF0865E5E8F8D308BDAD031 /* NicknameEditView.swift */,
+				65B0419B2FF8777262857CF0 /* NicknameEditViewModel.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -706,6 +712,8 @@
 				AFD92ED78D4F3B088FECD58F /* NaverMapView.swift in Sources */,
 				4069FFC5A39ACD4358A0F3B7 /* NearbyStoresView.swift in Sources */,
 				5BFAAAD69EBD5107ADC798BD /* NearbyStoresViewModel.swift in Sources */,
+				F201F0FB999ABD37F93BBB6A /* NicknameEditView.swift in Sources */,
+				E918708854E4796F3C3AF657 /* NicknameEditViewModel.swift in Sources */,
 				CAC452FEBE306C97D269AA36 /* NotificationPermissionRepository.swift in Sources */,
 				5AF8250ED1C436F9A64BDA45 /* PasswordResetView.swift in Sources */,
 				EE2AA10B3E58188DA12DA024 /* PasswordResetViewModel.swift in Sources */,

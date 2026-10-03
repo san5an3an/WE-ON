@@ -11,6 +11,7 @@ import Foundation
 enum InputValidationUseCase {
     static let minimumPasswordLength = 6
     static let minimumReviewLength = 10
+    static let nicknameLength = 2...12
 
     // 이메일 빈 값과 형식 확인
     static func validateEmail(_ email: String) -> WEONError? {
@@ -33,9 +34,15 @@ enum InputValidationUseCase {
     }
 
     // 회원가입 입력값과 비밀번호 확인값 일치 여부 확인
-    static func validateSignUp(email: String, password: String, passwordCheck: String) -> WEONError? {
+    static func validateSignUp(email: String, password: String, passwordCheck: String, nickname: String = "") -> WEONError? {
         if let error = validateLogin(email: email, password: password) { return error }
-        return password == passwordCheck ? nil : .passwordMismatch
+        if password != passwordCheck { return .passwordMismatch }
+        return nickname.trimmingCharacters(in: .whitespaces).isEmpty ? nil : validateNickname(nickname)
+    }
+
+    // 앞뒤 공백을 뺀 닉네임 글자 수 확인
+    static func validateNickname(_ nickname: String) -> WEONError? {
+        nicknameLength.contains(nickname.trimmingCharacters(in: .whitespaces).count) ? nil : .invalidNickname
     }
 
     // 가게명과 금액 입력 여부 확인
