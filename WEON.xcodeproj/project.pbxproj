@@ -19,7 +19,7 @@
 		1CFCF1F542E0C6079AC16820 /* ReviewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D22C15DC8C6AB44C2EE82E9 /* ReviewRepository.swift */; };
 		1DD80F9889BEF8DA0F4EA429 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEB73EB8D30CCB6981312B4 /* SignUpView.swift */; };
 		21B2BE8B7752057F2BC0A353 /* RemoteReviewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD11EF19DF78FFC64D720F12 /* RemoteReviewRepository.swift */; };
-		23240A672322D5F4764BBCB5 /* NMapsMap in Frameworks */ = {isa = PBXBuildFile; productRef = 10C332783EC6095D0B7A982A /* NMapsMap */; };
+		23240A672322D5F4764BBCB5 /* KakaoMapsSDK-SPM in Frameworks */ = {isa = PBXBuildFile; productRef = 48EABA997648C9729CA9F957 /* KakaoMapsSDK-SPM */; };
 		244B939CD78B92B35D3413BF /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31ACAE5928B09C1B5899BFB2 /* DataTests.swift */; };
 		24BDB478D9849640CFC1B014 /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6E41CD4347DDF1D1B428B5 /* MainTabView.swift */; };
 		2586BE9DC73BDA479C1027A0 /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 372BFBE2F2DFF6F2C4540D1D /* UserEntity.swift */; };
@@ -71,9 +71,9 @@
 		A357503154B5818BDAA4E642 /* PushTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC78E6436D9F69E77B852753 /* PushTokenStore.swift */; };
 		A49B7CBBE600EE9953FC4BDE /* RemoteAlarmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3087C3F003DA2C1E6EA7F5B /* RemoteAlarmRepository.swift */; };
 		A94E66CD0B35D8E13422DE5A /* DeviceNotificationPermissionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9E1A228F6FB0D9B3A49D22B /* DeviceNotificationPermissionRepository.swift */; };
-		AFD92ED78D4F3B088FECD58F /* NaverMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C9115BD28C6161C8E596436 /* NaverMapView.swift */; };
 		B1149F88D0FFA1FED068617C /* ReviewFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B587D6EB127E2848BB3CDF /* ReviewFormView.swift */; };
 		B3A2493D40C08CC3FA3E0A7A /* FirebaseAuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4670108503EFF74EF413D5AA /* FirebaseAuthClient.swift */; };
+		B814D8F2307152D10085516E /* KakaoMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B814D8F1307152C80085516E /* KakaoMapView.swift */; };
 		B8E4B39D7E226F6122756423 /* StoreDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8247534985C5D6EEBBA81A02 /* StoreDetailViewModel.swift */; };
 		C229E69B970D765519290E91 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1225BAEF179D90D6207BEEA /* SearchViewModel.swift */; };
 		C2E3EC07920BD967537A92DA /* StoreMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6133FB3EE27E151700870C57 /* StoreMapView.swift */; };
@@ -134,11 +134,11 @@
 		372BFBE2F2DFF6F2C4540D1D /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
 		390B37494C7904E9EBD8D17B /* WEON.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WEON.entitlements; sourceTree = "<group>"; };
 		3B00A164361FA8E96B65A4EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3EA4C97972630B1CF02AF6BD /* WEON.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = WEON.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3EA4C97972630B1CF02AF6BD /* WEON.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WEON.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		400C3DEAF72BAE57673C89FF /* InputValidationUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidationUseCase.swift; sourceTree = "<group>"; };
 		4670108503EFF74EF413D5AA /* FirebaseAuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthClient.swift; sourceTree = "<group>"; };
 		482B55B55E7A2C2633E09F01 /* RequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDTO.swift; sourceTree = "<group>"; };
-		484D5FC080B5DD9282C3FE2A /* WEONUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = WEONUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		484D5FC080B5DD9282C3FE2A /* WEONUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WEONUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A08EE82DA05A7D744A2A8B3 /* ReviewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewEntity.swift; sourceTree = "<group>"; };
 		54AED801F5F9224AC500ED85 /* ExpenditureDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenditureDetailView.swift; sourceTree = "<group>"; };
 		556E89AE9460996E80B26D9A /* LocationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRepository.swift; sourceTree = "<group>"; };
@@ -158,8 +158,7 @@
 		6FC5469943508874CC63D78F /* BudgetSummaryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetSummaryCard.swift; sourceTree = "<group>"; };
 		754A253284C5B67F50C2AEE0 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		79B63B7E5E75FC479CA9BA04 /* AppRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRoute.swift; sourceTree = "<group>"; };
-		7C9115BD28C6161C8E596436 /* NaverMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaverMapView.swift; sourceTree = "<group>"; };
-		813F28E75D2A8F28BDF0ADD2 /* WEONTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = WEONTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		813F28E75D2A8F28BDF0ADD2 /* WEONTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WEONTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8247534985C5D6EEBBA81A02 /* StoreDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreDetailViewModel.swift; sourceTree = "<group>"; };
 		835C5FEFDCAF91A16FCC8369 /* ReviewFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFormViewModel.swift; sourceTree = "<group>"; };
 		8BF0865E5E8F8D308BDAD031 /* NicknameEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameEditView.swift; sourceTree = "<group>"; };
@@ -176,6 +175,7 @@
 		ABBC22FF78147E4EBB316194 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		AD11EF19DF78FFC64D720F12 /* RemoteReviewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteReviewRepository.swift; sourceTree = "<group>"; };
 		B72F5DDFBE36DE2BF476E6D9 /* LINESeedKR-Rg.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LINESeedKR-Rg.otf"; sourceTree = "<group>"; };
+		B814D8F1307152C80085516E /* KakaoMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoMapView.swift; sourceTree = "<group>"; };
 		BC78E6436D9F69E77B852753 /* PushTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushTokenStore.swift; sourceTree = "<group>"; };
 		BF7D3A658395B1FD759B5BCF /* ExpenditureFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenditureFormView.swift; sourceTree = "<group>"; };
 		BF82A0A4442279B98F036424 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -210,7 +210,7 @@
 			files = (
 				298703BDEF59A7C149F9FAEF /* FirebaseAuth in Frameworks */,
 				9A9137872D463B2B92797E5A /* FirebaseMessaging in Frameworks */,
-				23240A672322D5F4764BBCB5 /* NMapsMap in Frameworks */,
+				23240A672322D5F4764BBCB5 /* KakaoMapsSDK-SPM in Frameworks */,
 				634906DBCBB1E6B2094A48C7 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,11 +458,11 @@
 		C1B2A9D078E51FB50C55A55C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				B814D8F1307152C80085516E /* KakaoMapView.swift */,
 				6FC5469943508874CC63D78F /* BudgetSummaryCard.swift */,
 				EE67E8FE75AEF1B0521BD64D /* CommonComponents.swift */,
 				0CCCFDC79E56E28C4B8C699F /* EmptyStateView.swift */,
 				917C30FD8F76F40E2685754E /* LottieLoadingView.swift */,
-				7C9115BD28C6161C8E596436 /* NaverMapView.swift */,
 				97414A5FCB3AF54C80CF477F /* ReviewRow.swift */,
 				06FB28EFAD31A94D772527B4 /* StoreComponents.swift */,
 			);
@@ -582,7 +582,7 @@
 			packageProductDependencies = (
 				30DEFF5755AD585178B73D6B /* FirebaseAuth */,
 				2F91662309BEB77FFCC3A1F2 /* FirebaseMessaging */,
-				10C332783EC6095D0B7A982A /* NMapsMap */,
+				48EABA997648C9729CA9F957 /* KakaoMapsSDK-SPM */,
 				5EB8E9536C352495A91F72D9 /* Lottie */,
 			);
 			productName = WEON;
@@ -632,8 +632,8 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				7AFFC79A3FC9F8344F85F68E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				EAE1CC413BCBA7426BAEA478 /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */,
 				772E48B983C921DE6DEEAC09 /* XCRemoteSwiftPackageReference "lottie-spm" */,
-				674387FA61532CC710C80150 /* XCRemoteSwiftPackageReference "SPM-NMapsMap" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 06B066940B6AF1DB2BFA1D34 /* Products */;
@@ -721,7 +721,6 @@
 				24BDB478D9849640CFC1B014 /* MainTabView.swift in Sources */,
 				79E1D5F8A5ED802310EA6A8C /* MyPageView.swift in Sources */,
 				27D9D82FDB2442316EB0B99A /* MyPageViewModel.swift in Sources */,
-				AFD92ED78D4F3B088FECD58F /* NaverMapView.swift in Sources */,
 				4069FFC5A39ACD4358A0F3B7 /* NearbyStoresView.swift in Sources */,
 				5BFAAAD69EBD5107ADC798BD /* NearbyStoresViewModel.swift in Sources */,
 				F201F0FB999ABD37F93BBB6A /* NicknameEditView.swift in Sources */,
@@ -750,6 +749,7 @@
 				C229E69B970D765519290E91 /* SearchViewModel.swift in Sources */,
 				19810F72C13CE394DF24157C /* SessionStore.swift in Sources */,
 				1DD80F9889BEF8DA0F4EA429 /* SignUpView.swift in Sources */,
+				B814D8F2307152D10085516E /* KakaoMapView.swift in Sources */,
 				9DE126523B3E639C301C0395 /* SignUpViewModel.swift in Sources */,
 				CCABD491CFF9574ABF1B7113 /* StoreComponents.swift in Sources */,
 				72A4D38BA0942D9ADA86F6F3 /* StoreDetailView.swift in Sources */,
@@ -1078,14 +1078,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		674387FA61532CC710C80150 /* XCRemoteSwiftPackageReference "SPM-NMapsMap" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/navermaps/SPM-NMapsMap";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.24.0;
-			};
-		};
 		772E48B983C921DE6DEEAC09 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-spm";
@@ -1102,14 +1094,17 @@
 				minimumVersion = 12.9.0;
 			};
 		};
+		EAE1CC413BCBA7426BAEA478 /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao-mapsSDK/KakaoMapsSDK-SPM";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.12.19;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		10C332783EC6095D0B7A982A /* NMapsMap */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 674387FA61532CC710C80150 /* XCRemoteSwiftPackageReference "SPM-NMapsMap" */;
-			productName = NMapsMap;
-		};
 		2F91662309BEB77FFCC3A1F2 /* FirebaseMessaging */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7AFFC79A3FC9F8344F85F68E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -1119,6 +1114,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7AFFC79A3FC9F8344F85F68E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		48EABA997648C9729CA9F957 /* KakaoMapsSDK-SPM */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EAE1CC413BCBA7426BAEA478 /* XCRemoteSwiftPackageReference "KakaoMapsSDK-SPM" */;
+			productName = "KakaoMapsSDK-SPM";
 		};
 		5EB8E9536C352495A91F72D9 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

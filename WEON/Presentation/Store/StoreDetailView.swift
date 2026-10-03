@@ -29,9 +29,11 @@ struct StoreDetailView: View {
                 }
             } else {
                 LottieLoadingView()
+                .padding(16)
+                .background(Color.canvas, in: RoundedRectangle(cornerRadius: Radius.m, style: .continuous))
             }
         }
-        .background(Color.canvas)
+        .background(Color.cardSurface)
         .navigationTitle(viewModel.store?.name ?? "")
         .navigationBarTitleDisplayMode(.inline)
         .navigationDestination(item: $reviewRoute) { route in
@@ -145,7 +147,7 @@ struct StoreDetailView: View {
     private func mapPreview(_ store: StoreDetail) -> some View {
         NavigationLink(value: AppRoute.storeMap(store)) {
             ZStack(alignment: .bottomTrailing) {
-                NaverMapView(store: store.coordinate, storeName: store.name, isInteractive: false, showsMyLocation: false)
+                KakaoMapView(store: store.coordinate, storeName: store.name, isInteractive: false, showsMyLocation: false)
                     .frame(height: 160)
                     .allowsHitTesting(false)
                 Label("지도 크게 보기", systemImage: "arrow.up.left.and.arrow.down.right")

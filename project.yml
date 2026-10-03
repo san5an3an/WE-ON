@@ -12,9 +12,9 @@ packages:
   Firebase:
     url: https://github.com/firebase/firebase-ios-sdk
     from: 12.9.0
-  NMapsMap:
-    url: https://github.com/navermaps/SPM-NMapsMap
-    from: 3.24.0
+  KakaoMap:
+    url: https://github.com/kakao-mapsSDK/KakaoMapsSDK-SPM
+    from: 2.12.19
   Lottie:
     url: https://github.com/airbnb/lottie-spm
     from: 4.6.1
@@ -61,7 +61,8 @@ targets:
         product: FirebaseAuth
       - package: Firebase
         product: FirebaseMessaging
-      - package: NMapsMap
+      - package: KakaoMap
+        product: KakaoMapsSDK-SPM
       - package: Lottie
   WEONTests:
     type: bundle.unit-test
