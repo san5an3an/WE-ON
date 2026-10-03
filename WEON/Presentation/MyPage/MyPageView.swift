@@ -69,13 +69,18 @@ struct MyPageView: View {
                             .foregroundStyle(Color.ink.opacity(0.7))
                     }
                 }
-                HStack(spacing: 0) {
-                    stat("이번 달 사용액", value: viewModel.summary.used.wonText)
-                    Divider().frame(height: 32).overlay(Color.ink.opacity(0.2))
-                    stat("남은 예산", value: viewModel.summary.balance.wonText)
-                    Divider().frame(height: 32).overlay(Color.ink.opacity(0.2))
-                    stat("지출 건수", value: "\(viewModel.expenditureCount)건")
+              HStack(spacing: 0) {
+                if viewModel.didLoad{
+                  stat("이번 달 사용액", value: viewModel.summary.used.wonText)
+                  Divider().frame(height: 32).overlay(Color.ink.opacity(0.2))
+                  stat("남은 예산", value: viewModel.summary.balance.wonText)
+                  Divider().frame(height: 32).overlay(Color.ink.opacity(0.2))
+                  stat("지출 건수", value: "\(viewModel.expenditureCount)건")
+                } else {
+                  LottieLoadingView()
+                    .frame(maxWidth: .infinity, minHeight: 50)
                 }
+              }
                 .padding(.vertical, Spacing.m)
                 .background(Color.white.opacity(0.55), in: RoundedRectangle(cornerRadius: Radius.m, style: .continuous))
             } else {
