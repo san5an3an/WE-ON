@@ -26,14 +26,15 @@ struct ViewModelTests {
 
     @Test func 로그인_실패시_에러_표시() async {
         let auth = MockAuthRepository()
-        auth.signInResult = .failure(.emailNotVerified)
+        auth.signInResult = .failure(.wrongPassword)
         let session = SessionStore(auth: auth)
         let viewModel = LoginViewModel()
         viewModel.email = "a@b.com"
         viewModel.password = "123456"
         await viewModel.signIn(with: session)
         #expect(session.user == nil)
-        #expect(viewModel.error == .emailNotVerified)
+        #expect(viewModel.error == .wrongPassword)
+        #expect(viewModel.needsVerification == false)
     }
 
     @Test func 회원가입은_검증_실패시_요청하지_않음() async {
@@ -122,5 +123,57 @@ struct ViewModelTests {
         #expect(alarm.subscribeCalls == 1)
         #expect(viewModel.isAlarmOn)
         #expect(viewModel.needsNotificationPermission == false)
+    }
+
+    @Test func 인증_전_계정이면_재전송_안내를_띄우고_다시_보냄() async {
+        let auth = MockAuthRepository()
+        auth.signInResult = .failure(.emailNotVerified)
+        let session = SessionStore(auth: auth)
+        let viewModel = LoginViewModel(dependencies: .mock(auth: auth))
+        viewModel.email = "a@b.com"
+        viewModel.password = "123456"
+        await viewModel.signIn(with: session)
+        #expect(viewModel.needsVerification)
+        #expect(viewModel.error == nil)
+        await viewModel.resendVerification()
+        #expect(auth.resendCalls == 1)
+        #expect(viewModel.message != nil)
+    }
+
+    @Test func 재전송이_너무_잦으면_안내() async {
+        let auth = MockAuthRepository()
+        auth.resendError = .tooManyRequests
+        let viewModel = LoginViewModel(dependencies: .mock(auth: auth))
+        viewModel.email = "a@b.com"
+        viewModel.password = "123456"
+        await viewModel.resendVerification()
+        #expect(viewModel.error == .tooManyRequests)
+        #expect(viewModel.message == nil)
+    }
+
+    @Test func 회원가입은_닉네임을_함께_보내고_잘못된_닉네임은_막음() async {
+        let auth = MockAuthRepository()
+        let viewModel = SignUpViewModel(dependencies: .mock(auth: auth))
+        viewModel.email = "a@b.com"
+        viewModel.password = "123456"
+        viewModel.passwordCheck = "123456"
+        viewModel.nickname = "가"
+        #expect(viewModel.canSubmit == false)
+        #expect(viewModel.nicknameMessage != nil)
+        viewModel.nickname = "위온이"
+        await viewModel.signUp()
+        #expect(auth.lastNickname == "위온이")
+        #expect(viewModel.didSignUp)
+    }
+
+    @Test func 닉네임을_바꾸면_세션_사용자도_바뀜() async throws {
+        let session = SessionStore(auth: MockAuthRepository(), user: UserProfile(id: 1, email: "a@b.com", nickname: "예전이름"))
+        let viewModel = NicknameEditViewModel(current: "예전이름")
+        #expect(viewModel.canSave == false)
+        viewModel.nickname = " 새이름 "
+        #expect(viewModel.canSave)
+        await viewModel.save(with: session)
+        #expect(session.user?.nickname == "새이름")
+        #expect(viewModel.didSave)
     }
 }

@@ -21,6 +21,8 @@ enum WEONError: LocalizedError, Equatable, Sendable {
     case emptyStoreName
     case emptyPrice
     case shortReviewBody
+    case invalidNickname
+    case tooManyRequests
     case notSignedIn
     case missingConfiguration
     case invalidRequest(String?)
@@ -44,6 +46,8 @@ enum WEONError: LocalizedError, Equatable, Sendable {
         case .emptyStoreName: "가게명을 입력해 주세요."
         case .emptyPrice: "금액을 입력해 주세요."
         case .shortReviewBody: "리뷰는 10글자 이상 입력해 주세요."
+        case .invalidNickname: "닉네임은 2자 이상 12자 이하로 입력해 주세요."
+        case .tooManyRequests: "요청이 너무 많아요. 잠시 후 다시 시도해 주세요."
         case .notSignedIn: "로그인이 필요해요."
         case .missingConfiguration: "앱 설정 파일이 없어 요청할 수 없어요."
         case .invalidRequest(let message): message ?? "잘못된 요청이에요."

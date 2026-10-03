@@ -16,6 +16,7 @@ struct MyPageView: View {
     @State private var isWorking = false
     @State private var farewell = false
     @State private var error: WEONError?
+    @State private var isNicknameEditing = false
 
     var body: some View {
         ScrollView {
@@ -34,6 +35,9 @@ struct MyPageView: View {
         }
         .alert("그동안 이용해 주셔서 감사합니다.", isPresented: $farewell) {
             Button("확인", role: .cancel) {}
+        }
+        .sheet(isPresented: $isNicknameEditing) {
+            NicknameEditView(current: session.user?.nickname ?? "")
         }
         .loadingOverlay(isWorking)
         .errorAlert($error)
@@ -121,6 +125,7 @@ struct MyPageView: View {
     private var menu: some View {
         VStack(spacing: 0) {
             if session.isSignedIn {
+                MenuRow(title: "닉네임 변경") { isNicknameEditing = true }
                 MenuRow(title: "가계부 보기") { session.selectedTab = .account }
                 NavigationLink(value: AppRoute.accountSetting) {
                     MenuRowLabel(title: "가계부 설정")
