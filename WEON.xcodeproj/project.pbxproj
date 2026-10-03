@@ -11,6 +11,7 @@
 		0A0A788E3990884411DEEBBF /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A8A51A2C59C3218C4A19FA0 /* ViewModelTests.swift */; };
 		0BA129487FBEBF186EBCADA2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F395F166AB9FD3F130B126C7 /* LoginView.swift */; };
 		0D54B31931AD1D19CFEBB244 /* LINESeedKR-Rg.otf in Resources */ = {isa = PBXBuildFile; fileRef = B72F5DDFBE36DE2BF476E6D9 /* LINESeedKR-Rg.otf */; };
+		12FD1C22A942AA1014187647 /* LottieLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C30FD8F76F40E2685754E /* LottieLoadingView.swift */; };
 		137F325B5658EF2AB607F87B /* WEONErrorEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 690004F02481548568264C01 /* WEONErrorEntity.swift */; };
 		15EFB233E26F15EAFB800EC0 /* AccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B30587E6987AC3DDA97078 /* AccountRepository.swift */; };
 		19810F72C13CE394DF24157C /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECF9192CBBA3D9E5FC401AB7 /* SessionStore.swift */; };
@@ -44,7 +45,9 @@
 		5AF8250ED1C436F9A64BDA45 /* PasswordResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90454F9853AA11A2495BFAD8 /* PasswordResetView.swift */; };
 		5BFAAAD69EBD5107ADC798BD /* NearbyStoresViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2F6F04127C0728BAD13AF6 /* NearbyStoresViewModel.swift */; };
 		5E20CB82ECA1F178AD5592DA /* RemoteStoreRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCDEAED27A021E0753C974B /* RemoteStoreRepository.swift */; };
+		5E7C332AAB668B86149FBB3A /* Lottie in Resources */ = {isa = PBXBuildFile; fileRef = 62CAD229351BA0E97D16A666 /* Lottie */; };
 		609EC3FEE0ED116DF976F8C0 /* RemoteAccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9208D1BFC1E8FF225E7360 /* RemoteAccountRepository.swift */; };
+		634906DBCBB1E6B2094A48C7 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 5EB8E9536C352495A91F72D9 /* Lottie */; };
 		66A8F90E58B17FBB9B63E752 /* LocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556E89AE9460996E80B26D9A /* LocationRepository.swift */; };
 		6858AA5A19C24F1E328799AB /* DomainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0518DB7D76E45799121C52ED /* DomainTests.swift */; };
 		6C6F51DFDE376B58C084FE0D /* TabNavigationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64F1D54A36F3BABD00F085B /* TabNavigationUITests.swift */; };
@@ -145,6 +148,7 @@
 		5D22C15DC8C6AB44C2EE82E9 /* ReviewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRepository.swift; sourceTree = "<group>"; };
 		5FCBEECDCBE470C251F4B34E /* AccountSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingViewModel.swift; sourceTree = "<group>"; };
 		6133FB3EE27E151700870C57 /* StoreMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreMapView.swift; sourceTree = "<group>"; };
+		62CAD229351BA0E97D16A666 /* Lottie */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Lottie; path = WEON/Resources/Lottie; sourceTree = SOURCE_ROOT; };
 		65B0419B2FF8777262857CF0 /* NicknameEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameEditViewModel.swift; sourceTree = "<group>"; };
 		662D2ACB7D53C51057E39F61 /* ExpenditureGroupingUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenditureGroupingUseCase.swift; sourceTree = "<group>"; };
 		67016C3ED77A1E9F1E13FBB3 /* ResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDTO.swift; sourceTree = "<group>"; };
@@ -161,6 +165,7 @@
 		8BF0865E5E8F8D308BDAD031 /* NicknameEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameEditView.swift; sourceTree = "<group>"; };
 		8C2F6F04127C0728BAD13AF6 /* NearbyStoresViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyStoresViewModel.swift; sourceTree = "<group>"; };
 		90454F9853AA11A2495BFAD8 /* PasswordResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetView.swift; sourceTree = "<group>"; };
+		917C30FD8F76F40E2685754E /* LottieLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieLoadingView.swift; sourceTree = "<group>"; };
 		97414A5FCB3AF54C80CF477F /* ReviewRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewRow.swift; sourceTree = "<group>"; };
 		9B6C8CC30EFBA287D3BB3F83 /* MockRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRepository.swift; sourceTree = "<group>"; };
 		9C5EA8BFC7E1A26A8CE1306B /* NearbyStoresView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NearbyStoresView.swift; sourceTree = "<group>"; };
@@ -206,6 +211,7 @@
 				298703BDEF59A7C149F9FAEF /* FirebaseAuth in Frameworks */,
 				9A9137872D463B2B92797E5A /* FirebaseMessaging in Frameworks */,
 				23240A672322D5F4764BBCB5 /* NMapsMap in Frameworks */,
+				634906DBCBB1E6B2094A48C7 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +461,7 @@
 				6FC5469943508874CC63D78F /* BudgetSummaryCard.swift */,
 				EE67E8FE75AEF1B0521BD64D /* CommonComponents.swift */,
 				0CCCFDC79E56E28C4B8C699F /* EmptyStateView.swift */,
+				917C30FD8F76F40E2685754E /* LottieLoadingView.swift */,
 				7C9115BD28C6161C8E596436 /* NaverMapView.swift */,
 				97414A5FCB3AF54C80CF477F /* ReviewRow.swift */,
 				06FB28EFAD31A94D772527B4 /* StoreComponents.swift */,
@@ -491,6 +498,7 @@
 			children = (
 				3B00A164361FA8E96B65A4EF /* Assets.xcassets */,
 				A2859516D16B6615B0037E56 /* Info.plist */,
+				62CAD229351BA0E97D16A666 /* Lottie */,
 				390B37494C7904E9EBD8D17B /* WEON.entitlements */,
 				9776F283D63DAFA66FBAC472 /* Fonts */,
 			);
@@ -575,6 +583,7 @@
 				30DEFF5755AD585178B73D6B /* FirebaseAuth */,
 				2F91662309BEB77FFCC3A1F2 /* FirebaseMessaging */,
 				10C332783EC6095D0B7A982A /* NMapsMap */,
+				5EB8E9536C352495A91F72D9 /* Lottie */,
 			);
 			productName = WEON;
 			productReference = 3EA4C97972630B1CF02AF6BD /* WEON.app */;
@@ -623,6 +632,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				7AFFC79A3FC9F8344F85F68E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				772E48B983C921DE6DEEAC09 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 				674387FA61532CC710C80150 /* XCRemoteSwiftPackageReference "SPM-NMapsMap" */,
 			);
 			preferredProjectObjectVersion = 77;
@@ -645,6 +655,7 @@
 				C7EC3A6D3047E7CFCCFC7D10 /* Assets.xcassets in Resources */,
 				7CEFE206A79B0647F88026AD /* LINESeedKR-Bd.otf in Resources */,
 				0D54B31931AD1D19CFEBB244 /* LINESeedKR-Rg.otf in Resources */,
+				5E7C332AAB668B86149FBB3A /* Lottie in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -706,6 +717,7 @@
 				66A8F90E58B17FBB9B63E752 /* LocationRepository.swift in Sources */,
 				0BA129487FBEBF186EBCADA2 /* LoginView.swift in Sources */,
 				8750DBBD58234DF77E3E8766 /* LoginViewModel.swift in Sources */,
+				12FD1C22A942AA1014187647 /* LottieLoadingView.swift in Sources */,
 				24BDB478D9849640CFC1B014 /* MainTabView.swift in Sources */,
 				79E1D5F8A5ED802310EA6A8C /* MyPageView.swift in Sources */,
 				27D9D82FDB2442316EB0B99A /* MyPageViewModel.swift in Sources */,
@@ -1074,6 +1086,14 @@
 				minimumVersion = 3.24.0;
 			};
 		};
+		772E48B983C921DE6DEEAC09 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.6.1;
+			};
+		};
 		7AFFC79A3FC9F8344F85F68E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1099,6 +1119,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7AFFC79A3FC9F8344F85F68E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		5EB8E9536C352495A91F72D9 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 772E48B983C921DE6DEEAC09 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

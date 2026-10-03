@@ -77,8 +77,7 @@ struct LoadingOverlay: ViewModifier {
                 if isLoading {
                     ZStack {
                         Color.black.opacity(0.08).ignoresSafeArea()
-                        ProgressView()
-                            .controlSize(.large)
+                        LottieLoadingView(size: 72)
                             .padding(Spacing.xl)
                             .background(.regularMaterial, in: RoundedRectangle(cornerRadius: Radius.m))
                     }

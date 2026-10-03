@@ -131,13 +131,13 @@ struct HomeView: View {
             }
             .padding(.horizontal, Spacing.l)
 
-            if viewModel.nearbyStores.isEmpty && viewModel.didLoad {
-                EmptyStateView(title: "주변 식당을 찾지 못했어요", message: "잠시 후 다시 불러와 주세요.", actionTitle: "다시 불러오기") {
-                    Task { await viewModel.load(isSignedIn: session.isSignedIn) }
-                }
+          if viewModel.nearbyStores.isEmpty && (viewModel.isLoading || !viewModel.didLoad) {
+            LottieLoadingView()
+              .frame(maxWidth: .infinity, minHeight: 180)
             } else if viewModel.nearbyStores.isEmpty {
-                ProgressView()
-                    .frame(maxWidth: .infinity, minHeight: 180)
+              EmptyStateView(title: "주변 식당을 찾지 못했어요", message: "잠시 후 다시 불러와 주세요.", actionTitle: "다시 불러오기") {
+                  Task { await viewModel.load(isSignedIn: session.isSignedIn) }
+              }
             } else {
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: Spacing.m) {
