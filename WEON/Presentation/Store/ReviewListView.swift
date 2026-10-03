@@ -63,10 +63,12 @@ struct ReviewListView: View {
                 ReviewFormView(storeId: storeId, storeName: storeName, editing: editing)
             }
         }
-        .confirmationDialog("리뷰를 삭제할까요?", isPresented: Binding(get: { pendingDelete != nil }, set: { if !$0 { pendingDelete = nil } }), titleVisibility: .visible, presenting: pendingDelete) { review in
-            Button("삭제", role: .destructive) { Task { await viewModel.delete(review) } }
+        .alert("리뷰 삭제", isPresented: Binding(get: { pendingDelete != nil }, set: { if !$0 { pendingDelete = nil } }),
+               presenting: pendingDelete) { review in
+          Button("취소", role: .cancel) {}
+          Button("삭제하기", role: .destructive) {Task{await viewModel.delete(review)}}
         } message: { _ in
-            Text("삭제한 리뷰는 되돌릴 수 없어요.")
+          Text("해당 작업은 되돌릴 수 없어요.\n정말로 작성하신 리뷰를 삭제하시겠어요?")
         }
         .errorAlert($viewModel.error)
         .refreshable { await viewModel.load() }

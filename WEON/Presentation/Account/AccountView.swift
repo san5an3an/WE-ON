@@ -100,8 +100,9 @@ private struct AccountContentView: View {
         Task { await viewModel.load() }
       }
     }
-    .confirmationDialog("지출 내역을 삭제할까요?", isPresented: Binding(get: { pendingDelete != nil }, set: { if !$0 { pendingDelete = nil } }), titleVisibility: .visible, presenting: pendingDelete) { expenditure in
-      Button("삭제", role: .destructive) { Task { await viewModel.delete(expenditure) } }
+    .alert("지출 내역을 삭제할까요?", isPresented: Binding(get: { pendingDelete != nil }, set: { if !$0 { pendingDelete = nil }}), presenting: pendingDelete) { expenditure in
+        Button("취소", role: .cancel) {}
+        Button("삭제", role: .destructive) { Task { await viewModel.delete(expenditure) } }
     }
     .loadingOverlay(viewModel.isLoading)
     .errorAlert($viewModel.error)
