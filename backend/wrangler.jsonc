@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "we-on-server",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-22",
+  "observability": { "enabled": true },
+  "vars": {
+    "FIREBASE_PROJECT_ID": "we-on-app"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "we-on",
+      "database_id": "29c00b02-250c-496d-b9e0-80242871442d",
+      "migrations_dir": "migrations"
+    }
+  ],
+  // 매일 저녁 8시(서울)에 지출 기록 알림 전송
+  "triggers": { "crons": ["0 11 * * *"] }
+}
