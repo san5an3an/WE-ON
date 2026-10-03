@@ -14,7 +14,7 @@
 | 상태 관리와 비동기 | Observation(`@Observable`), Swift Concurrency(async/await, `async let`, TaskGroup, actor) |
 | 네트워크 | URLSession, Codable |
 | 인증과 푸시 | Firebase Authentication, Firebase Cloud Messaging (firebase-ios-sdk 12.19) |
-| 지도와 위치 | 네이버 지도 SDK(NMapsMap 3.24), Core Location, Kakao Local API |
+| 지도와 위치 | 카카오맵 SDK(KakaoMapsSDK 2.12), Core Location, Kakao Local API |
 | 이미지 | ImageIO |
 | 서버 | Cloudflare Workers, Hono 4, Cloudflare D1(SQLite), jose |
 | 테스트 | Swift Testing, XCTest(UI 테스트), Vitest, Cloudflare Workers Vitest 통합 |
@@ -34,7 +34,7 @@ Combine, RxSwift, Alamofire, SnapKit 은 쓰지 않았어요. 이 앱의 비동�
 | URLSession, Codable | `APIClient`, 요청과 응답 DTO | 외부 라이브러리 없이 async API 로 충분했어요. 서버 응답 DTO 와 앱 Entity 를 분리했어요 |
 | Firebase Authentication | 회원가입, 이메일 인증, 로그인, 비밀번호 재설정, 탈퇴 | 서버에 보내는 ID 토큰을 여기서 받아요 |
 | Firebase Cloud Messaging | 지출 기록 알림 | 서버가 매일 저녁 알림을 보낼 때 기기 토큰으로 써요. 알림 권한은 사용자가 알림을 켤 때만 물어요 |
-| 네이버 지도 SDK | 가게 위치 미리보기와 큰 지도 | SDK 가 UIKit 뷰만 제공해서 `UIViewRepresentable` 로 연결했어요 |
+| 카카오맵 SDK | 가게 위치 미리보기, 큰 지도, 가게 위치 마커 | 주소 검색에 쓰는 카카오 개발자 앱 하나로 지도 키까지 관리할 수 있어요. SDK 가 UIKit 뷰만 제공해서 `UIViewRepresentable` 로 연결하고, 지도 엔진은 화면이 사라질 때 멈추게 했어요 |
 | Core Location | 현재 위치 | iOS 17 의 `CLLocationUpdate.liveUpdates()` 로 위치를 받고, 권한 응답은 CheckedContinuation 으로 기다려요 |
 | Kakao Local API | 현재 위치를 주소로 바꿔 홈 상단에 표시 | 위도와 경도를 받아 동네 주소로 바로 바꿔 줘요 |
 | Swift Charts | 가계부 사용액과 잔액 도넛 차트 | 기본 프레임워크라 라이브러리를 추가하지 않아도 됐어요 |
@@ -60,7 +60,7 @@ Combine, RxSwift, Alamofire, SnapKit 은 쓰지 않았어요. 이 앱의 비동�
 | 가계부 | 월별 사용액과 잔액을 도넛 차트로 보여주고, 날짜별로 묶은 지출 내역을 추가, 수정, 삭제할 수 있어요 |
 | 내 정보 | 이번 달 사용액, 남은 예산, 지출 건수를 보여주고 닉네임 변경, 로그아웃, 계정 탈퇴를 할 수 있어요 |
 
-가게 상세 화면에서는 선한 영향력 가게의 혜택과 제공 조건, 위생등급, 네이버 지도 위치, 리뷰를 볼 수 있어요.
+가게 상세 화면에서는 선한 영향력 가게의 혜택과 제공 조건, 위생등급, 카카오맵 위치, 리뷰를 볼 수 있어요.
 리뷰는 별점, 본문, 사진으로 남길 수 있고 내가 쓴 리뷰만 수정하거나 지울 수 있어요.
 
 ## 아키텍처
@@ -194,7 +194,7 @@ WE-ON
    xcodegen generate
    ```
 
-2. `Config/Secrets.example.xcconfig` 를 `Config/Secrets.xcconfig` 로 복사하고 Kakao REST API 키와 네이버 지도 Client ID 를 넣어요.
+2. `Config/Secrets.example.xcconfig` 를 `Config/Secrets.xcconfig` 로 복사하고 Kakao Developers 앱의 REST API 키와 네이티브 앱 키를 넣어요. 지도를 쓰려면 Kakao Developers 의 제품 설정에서 카카오맵 사용 설정을 켜야 해요.
 3. Firebase 콘솔에서 받은 `GoogleService-Info.plist` 를 `WEON/Resources/` 에 넣어요.
 4. `WEON.xcodeproj` 를 열고 실행해요.
 

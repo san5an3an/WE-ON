@@ -1,6 +1,6 @@
 // 서버 주소와 외부 서비스 키 기본값 지정
 SERVER_URL = https:/$()/we-on-server.developersankang.workers.dev
 KAKAO_API_KEY =
-NAVER_MAP_CLIENT_ID =
+KAKAO_NATIVE_APP_KEY =
 
 #include? "Secrets.xcconfig"

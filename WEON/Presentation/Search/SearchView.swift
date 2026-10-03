@@ -43,7 +43,7 @@ struct SearchView: View {
     @ViewBuilder
     private var emptyState: some View {
         if let keyword = viewModel.searchedKeyword, viewModel.filteredResults.isEmpty, !viewModel.isLoading {
-            EmptyStateView(title: "‘\(keyword)’ 검색 결과가 없어요", message: "검색어를 바꾸거나 필터를 전체로 바꿔 보세요.")
+            EmptyStateView(title: "‘\(keyword)’ 검색 결과가 없어요", message: "검색어를 바꾸거나 필터를 전체로 바꿔 보세요.\n\n현재위치 기준, 20km 거리만 검색돼요.")
         } else if viewModel.searchedKeyword == nil {
             EmptyStateView(title: "어떤 식당을 찾고 있나요?", message: "가게 이름이나 동네 이름으로 검색하면\n아동급식카드 가맹점과 선한 영향력 가게를 찾아 드려요.")
         }
