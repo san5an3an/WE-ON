@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { identify, requireUser } from "../auth";
 import { ApiError, type AppContext, type UserRow } from "../types";
-import { requireString, type Body } from "../validation";
+import { requireNickname, requireString, type Body } from "../validation";
 
 // 회원 API 경로 등록
 export const userRoutes = new Hono<AppContext>();
@@ -29,8 +29,10 @@ userRoutes.post("/login/signUp", async (c) => {
   if (existing) {
     throw new ApiError(400, "이미 가입된 사용자입니다.");
   }
+  // 닉네임을 보내지 않으면 이메일 앞부분으로 지정
+  const nickname = body.nickname === undefined || body.nickname === null || body.nickname === "" ? defaultNickname(email) : requireNickname(body, "nickname");
   await c.env.DB.prepare("INSERT INTO users (firebase_uid, email, nickname) VALUES (?, ?, ?)")
-    .bind(identity.uid, email, defaultNickname(email))
+    .bind(identity.uid, email, nickname)
     .run();
   return c.body(null, 200);
 });
@@ -49,6 +51,15 @@ userRoutes.post("/login", async (c) => {
     throw new ApiError(404, "가입되지 않은 사용자입니다.");
   }
   return c.json(toLoginResponse(user));
+});
+
+// 닉네임 변경 후 바뀐 로그인 정보 반환
+userRoutes.post("/myPage/nickname", async (c) => {
+  const body = await c.req.json<Body>();
+  const user = await requireUser(c, body);
+  const nickname = requireNickname(body, "nickname");
+  await c.env.DB.prepare("UPDATE users SET nickname = ? WHERE id = ?").bind(nickname, user.id).run();
+  return c.json(toLoginResponse({ ...user, nickname }));
 });
 
 // 회원과 회원이 남긴 데이터 전체 삭제

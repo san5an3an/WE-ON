@@ -48,6 +48,19 @@ export function requireYearMonth(body: Body, key: string): string {
   return value;
 }
 
+// 닉네임 글자 수 범위 지정
+export const nicknameLength = { min: 2, max: 12 };
+
+// 앞뒤 공백을 지운 닉네임 길이와 줄바꿈 포함 여부 확인 후 반환
+export function requireNickname(body: Body, key: string): string {
+  const value = requireString(body, key).trim();
+  const length = [...value].length;
+  if (length < nicknameLength.min || length > nicknameLength.max || /[\n\r\t]/.test(value)) {
+    throw new ApiError(400, `닉네임은 ${nicknameLength.min}자 이상 ${nicknameLength.max}자 이하로 입력해 주세요.`);
+  }
+  return value;
+}
+
 // 서울 기준 현재 연월을 yyyy-MM 으로 변환
 export function currentYearMonth(now = new Date()): string {
   const seoul = new Date(now.getTime() + 9 * 60 * 60 * 1000);

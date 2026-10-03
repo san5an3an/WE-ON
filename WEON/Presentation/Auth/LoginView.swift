@@ -109,6 +109,18 @@ struct LoginView: View {
             }
             .loadingOverlay(viewModel.isLoading)
             .errorAlert($viewModel.error)
+            // 인증 전 계정이면 인증 메일 재전송 선택지 표시
+            .alert("이메일 인증이 필요해요", isPresented: $viewModel.needsVerification) {
+                Button("인증 메일 다시 보내기") { Task { await viewModel.resendVerification() } }
+                Button("닫기", role: .cancel) {}
+            } message: {
+                Text("가입할 때 받은 메일의 인증 링크를 누른 뒤 다시 로그인해 주세요. 메일을 못 받았다면 다시 보내 드릴게요.")
+            }
+            .alert("인증 메일을 다시 보냈어요", isPresented: Binding(get: { viewModel.message != nil }, set: { if !$0 { viewModel.message = nil } })) {
+                Button("확인", role: .cancel) {}
+            } message: {
+                Text(viewModel.message ?? "")
+            }
         }
     }
 }

@@ -58,6 +58,11 @@ final class SessionStore {
         user = nil
     }
 
+    // 닉네임 변경 후 화면 전체에 새 닉네임 반영
+    func updateNickname(_ nickname: String) async throws {
+        user = try await auth.updateNickname(nickname)
+    }
+
     // 로그인 화면 표시
     func requireLogin() {
         isLoginPresented = true

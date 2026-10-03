@@ -14,6 +14,8 @@ final class SignUpViewModel {
     var email = ""
     var password = ""
     var passwordCheck = ""
+    // 비워 두면 이메일 앞부분으로 정해지는 닉네임
+    var nickname = ""
     private(set) var isLoading = false
     private(set) var didSignUp = false
     var error: WEONError?
@@ -39,21 +41,26 @@ final class SignUpViewModel {
         passwordCheck.isEmpty || password == passwordCheck ? nil : WEONError.passwordMismatch.errorDescription
     }
 
+    // 닉네임 입력칸 아래 안내 문구 지정
+    var nicknameMessage: String? {
+        nickname.isEmpty ? nil : InputValidationUseCase.validateNickname(nickname)?.errorDescription
+    }
+
     // 가입하기 버튼 활성화 여부 계산
     var canSubmit: Bool {
-        InputValidationUseCase.validateSignUp(email: email, password: password, passwordCheck: passwordCheck) == nil && !isLoading
+        InputValidationUseCase.validateSignUp(email: email, password: password, passwordCheck: passwordCheck, nickname: nickname) == nil && !isLoading
     }
 
     // 입력값 확인 후 회원가입 진행
     func signUp() async {
-        if let error = InputValidationUseCase.validateSignUp(email: email, password: password, passwordCheck: passwordCheck) {
+        if let error = InputValidationUseCase.validateSignUp(email: email, password: password, passwordCheck: passwordCheck, nickname: nickname) {
             self.error = error
             return
         }
         isLoading = true
         defer { isLoading = false }
         do {
-            try await dependencies.auth.signUp(email: email.trimmingCharacters(in: .whitespaces), password: password)
+            try await dependencies.auth.signUp(email: email.trimmingCharacters(in: .whitespaces), password: password, nickname: nickname)
             didSignUp = true
         } catch {
             self.error = WEONError.wrap(error)

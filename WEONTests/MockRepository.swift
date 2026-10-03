@@ -13,13 +13,24 @@ final class MockAuthRepository: AuthRepository, @unchecked Sendable {
     var signInResult: Result<UserProfile, WEONError> = .success(UserProfile(id: 1, email: "a@b.com", nickname: "위온"))
     var signUpError: WEONError?
     var resetError: WEONError?
+    var resendError: WEONError?
     private(set) var signUpCalls = 0
+    private(set) var lastNickname: String?
+    private(set) var resendCalls = 0
 
     func signIn(email: String, password: String) async throws -> UserProfile { try signInResult.get() }
     func restoreSession() async -> UserProfile? { nil }
-    func signUp(email: String, password: String) async throws {
+    func signUp(email: String, password: String, nickname: String) async throws {
         signUpCalls += 1
+        lastNickname = nickname
         if let signUpError { throw signUpError }
+    }
+    func resendVerification(email: String, password: String) async throws {
+        resendCalls += 1
+        if let resendError { throw resendError }
+    }
+    func updateNickname(_ nickname: String) async throws -> UserProfile {
+        UserProfile(id: 1, email: "a@b.com", nickname: nickname.trimmingCharacters(in: .whitespaces))
     }
     func sendPasswordReset(to email: String) async throws {
         if let resetError { throw resetError }

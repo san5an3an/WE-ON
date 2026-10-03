@@ -31,19 +31,37 @@ struct RemoteAuthRepository: AuthRepository {
     }
 
     // Firebase 계정 생성, 서버 가입, 인증 메일 발송 순서로 회원가입 진행
-    func signUp(email: String, password: String) async throws {
-        if let error = InputValidationUseCase.validateEmail(email) ?? InputValidationUseCase.validatePassword(password) { throw error }
+    func signUp(email: String, password: String, nickname: String) async throws {
+        if let error = InputValidationUseCase.validateSignUp(email: email, password: password, passwordCheck: password, nickname: nickname) { throw error }
+        let trimmedNickname = nickname.trimmingCharacters(in: .whitespaces)
         try await firebase.createUser(email: email, password: password)
         do {
             let token = try await firebase.idToken()
-            try await client.send(Endpoint(path: "/login/signUp", method: .post, body: SignUpRequestDTO(firebaseToken: token, email: email)))
-            try await firebase.sendEmailVerification()
-            try firebase.signOut()
+            let body = SignUpRequestDTO(firebaseToken: token, email: email, nickname: trimmedNickname.isEmpty ? nil : trimmedNickname)
+            try await client.send(Endpoint(path: "/login/signUp", method: .post, body: body))
         } catch {
-            // 서버 가입이 실패하면 Firebase 계정도 함께 정리
+            // 서버 가입이 실패했을 때만 Firebase 계정을 지워 서버와 상태 맞춤
             try? await firebase.deleteCurrentUser()
             throw error
         }
+        // 인증 메일 발송이 실패해도 계정은 유지하고, 로그인 화면에서 다시 받도록 처리
+        try? await firebase.sendEmailVerification()
+        try? firebase.signOut()
+    }
+
+    // 입력값 확인 후 인증 메일 다시 발송
+    func resendVerification(email: String, password: String) async throws {
+        if let error = InputValidationUseCase.validateLogin(email: email, password: password) { throw error }
+        try await firebase.resendVerification(email: email, password: password)
+    }
+
+    // 닉네임 확인 후 서버에 변경 요청
+    func updateNickname(_ nickname: String) async throws -> UserProfile {
+        if let error = InputValidationUseCase.validateNickname(nickname) { throw error }
+        let token = try await firebase.idToken()
+        let body = NicknameRequestDTO(firebaseToken: token, nickname: nickname.trimmingCharacters(in: .whitespaces))
+        let response: LoginResponseDTO = try await client.send(Endpoint(path: "/myPage/nickname", method: .post, body: body))
+        return response.toEntity()
     }
 
     // 입력값 확인 후 비밀번호 재설정 메일 발송

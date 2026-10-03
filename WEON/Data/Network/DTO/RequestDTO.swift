@@ -16,6 +16,14 @@ struct TokenRequestDTO: Encodable, Sendable {
 struct SignUpRequestDTO: Encodable, Sendable {
     let firebaseToken: String
     let email: String
+    // 비어 있으면 키 자체를 보내지 않아 서버 기본 닉네임 사용
+    let nickname: String?
+}
+
+// 닉네임 변경 요청 Body 생성
+struct NicknameRequestDTO: Encodable, Sendable {
+    let firebaseToken: String
+    let nickname: String
 }
 
 // 현재 위치 요청 Body 생성, 서버 키 이름 curLogt 는 경도 표시

@@ -72,6 +72,22 @@ describe("회원", () => {
     expect((await signUp(alice, "alice@weon.app")).status).toBe(400);
   });
 
+  it("가입 때 보낸 닉네임을 저장하고 내 정보에서 바꿀 수 있다", async () => {
+    await call("POST", "/login/signUp", { firebaseToken: alice, email: "alice@weon.app", nickname: "  위온이  " });
+    expect((await call("POST", "/login", { firebaseToken: alice })).json.userName).toBe("위온이");
+    const changed = await call("POST", "/myPage/nickname", { firebaseToken: alice, nickname: "새이름" });
+    expect(changed.status).toBe(200);
+    expect(changed.json).toMatchObject({ email: "alice@weon.app", userName: "새이름" });
+    expect((await call("POST", "/login", { firebaseToken: alice })).json.userName).toBe("새이름");
+  });
+
+  it("닉네임 길이가 맞지 않으면 400 을 돌려준다", async () => {
+    expect((await call("POST", "/login/signUp", { firebaseToken: alice, email: "alice@weon.app", nickname: "a" })).status).toBe(400);
+    await signUp(alice, "alice@weon.app");
+    expect((await call("POST", "/myPage/nickname", { firebaseToken: alice, nickname: "열세글자를넘는아주긴닉네임" })).status).toBe(400);
+    expect((await call("POST", "/myPage/nickname", { firebaseToken: bob, nickname: "가입안함" })).status).toBe(404);
+  });
+
   it("토큰이 없으면 401 을 돌려준다", async () => {
     expect((await call("POST", "/login", {})).status).toBe(401);
   });
