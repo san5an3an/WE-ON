@@ -23,12 +23,12 @@ struct StoreDetailView: View {
         Group {
             if let store = viewModel.store {
                 content(store)
-            } else if viewModel.loadFailed {
+            } else if viewModel.loadFailed && !viewModel.isLoading {
                 EmptyStateView(title: "가게를 찾을 수 없어요", message: "네트워크 상태를 확인한 뒤 다시 시도해 주세요.", actionTitle: "다시 시도") {
                     Task { await viewModel.load() }
                 }
             } else {
-                ProgressView()
+                LottieLoadingView()
             }
         }
         .background(Color.canvas)
