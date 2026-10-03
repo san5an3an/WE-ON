@@ -11,6 +11,7 @@ interface StoreRow {
   id: number;
   name: string;
   store_type: number;
+  category: string;
   zip_code: number;
   road_address: string;
   lot_address: string;
@@ -26,6 +27,8 @@ interface StoreRow {
 const nearbyLimit = 50;
 // 검색 결과 응답 최대 개수 지정
 const searchLimit = 100;
+// 검색 반경 지정, 전국 가게를 매번 훑으면 D1 무료 읽기 한도를 금방 넘기므로 현재 위치 주변으로 제한
+const searchRadiusKm = 20;
 // 리뷰 별점 평균을 함께 조회하는 SQL 조각 지정
 const ratingColumn = "(SELECT AVG(rating) FROM reviews WHERE reviews.store_id = stores.id) AS rating";
 
@@ -45,6 +48,7 @@ function toSimpleStore(row: StoreRow, distance: number) {
     storeId: row.id,
     storeName: row.name,
     storeType: row.store_type,
+    storeCategory: row.category,
     curDist: roundKm(distance),
     totalRating: Math.round((row.rating ?? 0) * 10) / 10,
   };
@@ -80,7 +84,7 @@ storeRoutes.post("/restaurant/findByCur", async (c) => {
   return c.json([]);
 });
 
-// 가게명과 주소로 가게 검색, 가까운 순서로 정렬
+// 현재 위치 주변에서 가게명과 주소로 가게 검색, 가까운 순서로 정렬
 storeRoutes.post("/restaurant/findByKeyword", async (c) => {
   const center = readCoordinate(await c.req.json<Body>());
   const keyword = (c.req.query("keyword") ?? "").trim();
@@ -88,14 +92,18 @@ storeRoutes.post("/restaurant/findByKeyword", async (c) => {
     return c.json([]);
   }
   const pattern = `%${keyword.replace(/[\\%_]/g, (ch) => `\\${ch}`)}%`;
+  const box = boundingBox(center, searchRadiusKm);
   const result = await c.env.DB.prepare(
     `SELECT *, ${ratingColumn} FROM stores
-     WHERE name LIKE ?1 ESCAPE '\\' OR road_address LIKE ?1 ESCAPE '\\' OR lot_address LIKE ?1 ESCAPE '\\'
+     WHERE lat BETWEEN ?2 AND ?3 AND lng BETWEEN ?4 AND ?5
+       AND (name LIKE ?1 ESCAPE '\\' OR road_address LIKE ?1 ESCAPE '\\' OR lot_address LIKE ?1 ESCAPE '\\')
      LIMIT 1000`,
   )
-    .bind(pattern)
+    .bind(pattern, box.minLat, box.maxLat, box.minLng, box.maxLng)
     .all<StoreRow>();
-  const rows = sortByDistance(result.results, center).slice(0, searchLimit);
+  const rows = sortByDistance(result.results, center)
+    .filter((item) => item.distance <= searchRadiusKm)
+    .slice(0, searchLimit);
   return c.json(rows.map(({ row, distance }) => toSimpleStore(row, distance)));
 });
 
@@ -119,6 +127,7 @@ storeRoutes.post("/restaurant/:storeId{[0-9]+}", async (c) => {
     prodName: row.benefit_name,
     prodTarget: row.benefit_target,
     storeType: row.store_type,
+    storeCategory: row.category,
     curDist: roundKm(distanceKm(center, { lat: row.lat, lng: row.lng })),
     totalRating: Math.round((row.rating ?? 0) * 10) / 10,
     hygieneGrade: row.hygiene_grade,
