@@ -27,11 +27,17 @@ struct MyPageView: View {
         }
         .background(Color.canvas)
         .toolbar(.hidden, for: .navigationBar)
-        .confirmationDialog("로그아웃할까요?", isPresented: $isLogoutConfirming, titleVisibility: .visible) {
-            Button("로그아웃", role: .destructive) { signOut() }
+        .alert("로그아웃", isPresented: $isLogoutConfirming) {
+          Button("취소", role: .cancel) {}
+          Button("로그아웃", role: .destructive) {signOut()}
+        } message: {
+          Text("정말 로그아웃 하시겠어요?\n로그아웃해도 가계부 정보는 서버에 안전하게 저장돼요.")
         }
-        .confirmationDialog("한 번 삭제한 계정은 복구할 수 없어요.\n정말 탈퇴할까요?", isPresented: $isDeleteConfirming, titleVisibility: .visible) {
-            Button("탈퇴하기", role: .destructive) { Task { await deleteAccount() } }
+        .alert("계정 탈퇴", isPresented: $isDeleteConfirming) {
+          Button("취소", role: .cancel){}
+          Button("탈퇴하기", role: .destructive) {Task {await deleteAccount()}}
+        } message: {
+          Text("한 번 삭제한 계정은 복구할 수 없어요.\n그래도 정말로 탈퇴하시겠어요?")
         }
         .alert("그동안 이용해 주셔서 감사합니다.", isPresented: $farewell) {
             Button("확인", role: .cancel) {}
