@@ -49,7 +49,7 @@ Combine, RxSwift, Alamofire, SnapKit 은 쓰지 않았어요. 원본은 RxSwift 
 | Hono | 라우트 나누기와 에러 응답 통일 | Workers 에서 가볍게 돌아가고, 라우트를 기능별 파일로 나누기 쉬웠어요 |
 | Cloudflare D1 | 회원, 가게, 리뷰, 가계부, 알림 저장 | Workers 와 바로 연결되는 SQLite 라서 SQL 로 조회하고 마이그레이션 파일로 테이블을 관리해요 |
 | jose | Firebase ID 토큰 검증, FCM 전송용 토큰 발급 | Google 공개키로 토큰 서명을 확인하고, 서비스 계정 키로 알림 전송 토큰을 만들어요 |
-| Vitest, Workers Vitest 통합 | 서버 테스트 17개 | 실제 Workers 실행 환경과 D1 을 로컬에서 띄워 테스트해요 |
+| Vitest, Workers Vitest 통합 | 서버 테스트 24개 | 실제 Workers 실행 환경과 D1 을 로컬에서 띄워 테스트해요 |
 
 ## 주요 기능
 
@@ -168,6 +168,7 @@ WE-ON
 └── backend
     ├── src            API 라우트, 토큰 검증, 거리 계산, 알림 전송
     ├── migrations     D1 테이블 생성 SQL
+    ├── scripts        공공데이터 가맹점 변환과 적재 SQL 생성
     └── test           Workers 실행 환경 테스트
 ```
 
@@ -188,10 +189,11 @@ WE-ON
 - Cloudflare Workers 위에서 원본과 같은 형식의 API 19개와 새로 만든 닉네임 변경 API 1개를 제공해요.
 - 로그인은 Firebase Authentication 을 쓰고, 서버는 요청마다 Firebase ID 토큰의 서명과 발급 프로젝트를 확인해요.
 - 데이터는 Cloudflare D1 에 저장해요. 주변 가게는 위도와 경도 범위로 먼저 거른 뒤 실제 거리를 계산해서 가까운 순서로 돌려줘요.
+- 검색은 현재 위치 20km 안에서만 해요. 가게 30만 곳을 매번 다 훑으면 D1 무료 읽기 한도를 금방 넘기 때문이에요.
 - 다른 사람의 리뷰나 지출은 수정하거나 지울 수 없고, 탈퇴하면 남긴 데이터도 함께 지워요.
 - 매일 저녁 8시에 지출 알림을 켠 사용자에게 기록 알림을 보내요.
 
-가게 정보는 공공데이터포털의 전국아동복지급식정보표준데이터와 지역별 아동급식카드 가맹점 데이터, 경기도 선한영향력가게 데이터를 사용해요.
+가게 정보는 공공데이터포털의 전국아동복지급식정보표준데이터 오픈 API 로 받아요. 음식점, 편의점, 마트 약 30만 곳을 `backend/scripts/build-stores.mjs` 로 변환하고, D1 무료 쓰기 한도에 맞춰 여러 날에 나눠 넣어요. 데이터를 다시 받을 때는 원본 식별값으로 같은 가게를 찾아 내용만 갱신해서, 그 가게에 남긴 리뷰가 그대로 남아요.
 
 ## 실행 환경 설정
 
@@ -217,7 +219,7 @@ npm run dev
 
 ## 테스트 구성
 
-앱은 단위 테스트 32개와 UI 테스트 1개, 서버는 Workers 실행 환경 테스트 17개가 있어요.
+앱은 단위 테스트 32개와 UI 테스트 1개, 서버는 Workers 실행 환경 테스트 24개가 있어요.
 
 ```sh
 xcodebuild test -project WEON.xcodeproj -scheme WEON -destination 'platform=iOS Simulator,name=iPhone 17'
