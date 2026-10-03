@@ -9,11 +9,16 @@ import FirebaseCore
 import FirebaseMessaging
 import UIKit
 import UserNotifications
+import KakaoMapsSDK
 
 // FCM 토큰 발급과 APNs 등록은 UIApplicationDelegate 에서만 받을 수 있어 UIKit 사용
 final class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
     // Firebase 설정 파일이 있을 때만 Firebase 시작과 FCM 토큰 발급용 원격 알림 등록, 알림 권한은 가계부 설정에서 요청
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+      // 카카오맵 appKey가 있을 때에만 mapSDK 시작
+      if let key = Bundle.main.object(forInfoDictionaryKey: "KAKAO_NATIVE_APP_KEY") as? String, !key.isEmpty {
+        SDKInitializer.InitSDK(appKey: key)
+      }
         guard Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist") != nil else { return true }
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
