@@ -29,6 +29,13 @@ struct InputValidationTests {
         #expect(InputValidationUseCase.validateSignUp(email: "a@b.com", password: "123456", passwordCheck: "654321") == .passwordMismatch)
     }
 
+    @Test func 닉네임은_공백_제외_2자에서_12자() {
+        #expect(InputValidationUseCase.validateNickname(" 가 ") == .invalidNickname)
+        #expect(InputValidationUseCase.validateNickname("위온") == nil)
+        #expect(InputValidationUseCase.validateNickname("열두글자를넘는긴닉네임이요") == .invalidNickname)
+        #expect(InputValidationUseCase.validateSignUp(email: "a@b.com", password: "123456", passwordCheck: "123456", nickname: "") == nil)
+    }
+
     @Test func 지출_입력_검증() {
         #expect(InputValidationUseCase.validateExpenditure(ExpenditureDraft(storeName: " ", price: 1000)) == .emptyStoreName)
         #expect(InputValidationUseCase.validateExpenditure(ExpenditureDraft(storeName: "분식", price: nil)) == .emptyPrice)

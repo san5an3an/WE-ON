@@ -27,7 +27,24 @@ struct FirebaseAuthClient: Sendable {
     func signIn(email: String, password: String) async throws {
         do {
             let result = try await auth().signIn(withEmail: email, password: password)
-            guard result.user.isEmailVerified else { throw WEONError.emailNotVerified }
+            // 인증 전 계정은 로그인 상태로 남기지 않도록 바로 로그아웃
+            guard result.user.isEmailVerified else {
+                try? auth().signOut()
+                throw WEONError.emailNotVerified
+            }
+        } catch let error as WEONError {
+            throw error
+        } catch {
+            throw map(error)
+        }
+    }
+
+    // 인증 전 계정으로 잠깐 로그인해 인증 메일을 다시 보낸 뒤 로그아웃
+    func resendVerification(email: String, password: String) async throws {
+        do {
+            let result = try await auth().signIn(withEmail: email, password: password)
+            defer { try? auth().signOut() }
+            try await result.user.sendEmailVerification()
         } catch let error as WEONError {
             throw error
         } catch {
@@ -98,6 +115,7 @@ struct FirebaseAuthClient: Sendable {
         case .userNotFound: return .unknownUser
         case .emailAlreadyInUse: return .emailAlreadyInUse
         case .networkError: return .network
+        case .tooManyRequests: return .tooManyRequests
         default: return .unknown
         }
     }

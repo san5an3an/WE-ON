@@ -18,6 +18,7 @@ struct SignUpView: View {
         case email
         case password
         case passwordCheck
+        case nickname
     }
 
     var body: some View {
@@ -49,6 +50,13 @@ struct SignUpView: View {
                     SecureField("비밀번호를 한 번 더 입력", text: $viewModel.passwordCheck)
                         .textContentType(.newPassword)
                         .focused($focusedField, equals: .passwordCheck)
+                        .submitLabel(.next)
+                        .onSubmit { focusedField = .nickname }
+                }
+                FormField(title: "닉네임 (선택)", message: viewModel.nicknameMessage, isFocused: focusedField == .nickname, text: $viewModel.nickname) {
+                    TextField("2~12자, 비우면 이메일 앞부분 사용", text: $viewModel.nickname)
+                        .textContentType(.nickname)
+                        .focused($focusedField, equals: .nickname)
                         .submitLabel(.done)
                 }
             }
