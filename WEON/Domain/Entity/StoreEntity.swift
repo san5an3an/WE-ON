@@ -13,7 +13,7 @@ struct Coordinate: Hashable, Sendable {
     let longitude: Double
 
     // 위치 권한이 없을 때 쓰는 기본 좌표 지정
-    static let fallback = Coordinate(latitude: 37.66, longitude: 126.80)
+  static let fallback = Coordinate(latitude: 37.5665, longitude: 126.978)
 }
 
 // 아동급식카드 가맹점과 선한 영향력 가게 여부 표시
