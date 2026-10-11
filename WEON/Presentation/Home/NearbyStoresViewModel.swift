@@ -26,7 +26,7 @@ final class NearbyStoresViewModel {
 
     // 선택한 필터에 맞는 가게 선별
     var filteredStores: [StoreSummary] {
-        stores.filter { filter.matches($0.kind) }
+        stores.filter { filter.matches($0) }
     }
 
     // 현재 위치 주변 가게와 주소 조회

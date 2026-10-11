@@ -31,10 +31,11 @@ struct SimpleStoreDTO: Decodable {
     let storeType: Int
     let curDist: Double
     let totalRating: Double
+    let storeCategory: String?
 
     // 화면에서 쓰는 가게 요약으로 변환
     func toEntity() -> StoreSummary {
-        StoreSummary(id: storeId, name: storeName, kind: StoreKind(storeType: storeType), distanceKm: curDist, rating: totalRating)
+      StoreSummary(id: storeId, name: storeName, kind: StoreKind(storeType: storeType), distanceKm: curDist, rating: totalRating, category: storeCategory.flatMap(StoreCategory.init(rawValue:)) ?? .restaurant)
     }
 }
 
@@ -53,6 +54,7 @@ struct StoreDTO: Decodable {
     let curDist: Double
     let totalRating: Double
     let hygieneGrade: String
+    let storeCategory: String?
 
     // 화면에서 쓰는 가게 상세로 변환
     func toEntity() -> StoreDetail {
@@ -68,7 +70,8 @@ struct StoreDTO: Decodable {
             kind: StoreKind(storeType: storeType),
             distanceKm: curDist,
             rating: totalRating,
-            hygieneGrade: hygieneGrade
+            hygieneGrade: hygieneGrade,
+            category: storeCategory.flatMap(StoreCategory.init(rawValue:)) ?? .restaurant
         )
     }
 }

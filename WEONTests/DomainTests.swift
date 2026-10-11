@@ -58,10 +58,11 @@ struct StoreEntityTests {
     }
 
     @Test func 필터는_두_가지_모두인_가게를_포함() {
-        let both = StoreKind(storeType: 2)
+      let both = StoreSummary(id: 1, name: "둘 다", kind: StoreKind(storeType: 2), distanceKm: 0, rating: 0, category: .restaurant)
+      let goodOnly = StoreSummary(id: 2, name: "선한 영향력인", kind: StoreKind(storeType: 0), distanceKm: 0, rating: 0, category: .restaurant)
         #expect(StoreFilter.mealCard.matches(both))
         #expect(StoreFilter.goodInfluence.matches(both))
-        #expect(!StoreFilter.mealCard.matches(StoreKind(storeType: 0)))
+        #expect(!StoreFilter.mealCard.matches(goodOnly))
     }
 
     @Test func 거리_표시() {
