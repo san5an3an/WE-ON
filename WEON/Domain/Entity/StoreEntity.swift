@@ -42,6 +42,9 @@ struct StoreKind: OptionSet, Hashable, Sendable {
 enum StoreFilter: CaseIterable, Hashable, Sendable {
     case all
     case mealCard
+    case restaurant
+    case convenience
+    case mart
     case goodInfluence
 
     // 필터 버튼 문구 지정
@@ -49,16 +52,22 @@ enum StoreFilter: CaseIterable, Hashable, Sendable {
         switch self {
         case .all: "전체"
         case .mealCard: "아동급식카드"
+        case .restaurant: "식당"
+        case .convenience: "편의점"
+        case .mart: "마트"
         case .goodInfluence: "선한 영향력"
         }
     }
 
     // 가게가 이 필터 조건에 맞는지 확인
-    func matches(_ kind: StoreKind) -> Bool {
+    func matches(_ store: StoreSummary) -> Bool {
         switch self {
         case .all: true
-        case .mealCard: kind.contains(.mealCard)
-        case .goodInfluence: kind.contains(.goodInfluence)
+        case .mealCard: store.kind.contains(.mealCard)
+        case .restaurant: store.category == .restaurant
+        case .convenience: store.category == .convenience
+        case .mart: store.category == .mart
+        case .goodInfluence: store.kind.contains(.goodInfluence)
         }
     }
 }
@@ -70,6 +79,7 @@ struct StoreSummary: Identifiable, Hashable, Sendable {
     let kind: StoreKind
     let distanceKm: Double
     let rating: Double
+    let category: StoreCategory
 }
 
 // 가게 상세 화면에 쓰는 정보 보관
@@ -86,6 +96,7 @@ struct StoreDetail: Identifiable, Hashable, Sendable {
     let distanceKm: Double
     let rating: Double
     let hygieneGrade: String
+    let category: StoreCategory
 
     // 괄호로 붙은 상세 주소를 뺀 도로명 주소 표시
     var shortAddress: String {
@@ -102,5 +113,21 @@ extension Double {
             return String(format: "%.1fkm", self)
         }
         return "\(Int(self * 1000))m"
+    }
+}
+
+// 가게 목록 필터 종류 구분
+enum StoreCategory: String, CaseIterable, Hashable, Sendable {
+    case restaurant
+    case convenience
+    case mart
+
+    // 필터 버튼 문구 지정
+    var title: String {
+        switch self {
+        case .restaurant: "식당"
+        case .convenience: "편의점"
+        case .mart: "마트"
+        }
     }
 }
