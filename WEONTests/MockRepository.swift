@@ -42,9 +42,9 @@ final class MockAuthRepository: AuthRepository, @unchecked Sendable {
 // 고정된 가게 3곳을 돌려주는 가짜 가게 Repository
 struct MockStoreRepository: StoreRepository {
     var stores: [StoreSummary] = [
-        StoreSummary(id: 1, name: "행복 분식", kind: StoreKind(storeType: 1), distanceKm: 0.4, rating: 4.5),
-        StoreSummary(id: 2, name: "선한 국밥", kind: StoreKind(storeType: 0), distanceKm: 1.2, rating: 4.0),
-        StoreSummary(id: 3, name: "함께 식당", kind: StoreKind(storeType: 2), distanceKm: 2.0, rating: 3.5)
+      StoreSummary(id: 1, name: "행복 분식", kind: StoreKind(storeType: 1), distanceKm: 0.4, rating: 4.5, category: .restaurant),
+      StoreSummary(id: 2, name: "선한 편의점", kind: StoreKind(storeType: 0), distanceKm: 1.2, rating: 4.0, category: .convenience),
+      StoreSummary(id: 3, name: "착한 식자재마트", kind: StoreKind(storeType: 2), distanceKm: 2.0, rating: 3.5, category: .mart)
     ]
 
     func nearbyStores(around coordinate: Coordinate) async throws -> [StoreSummary] { stores }

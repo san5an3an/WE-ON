@@ -26,7 +26,7 @@ final class SearchViewModel {
 
     // 선택한 필터에 맞는 결과 선별
     var filteredResults: [StoreSummary] {
-        results.filter { filter.matches($0.kind) }
+        results.filter { filter.matches($0) }
     }
 
     // 빈 칸이 아닐 때만 가게 검색 처리
